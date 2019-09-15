@@ -22,6 +22,9 @@ jobs:
         npm install
         npm run build
         docker-compose -f ./docker-compose-stg.yml build
+    - uses: azure/actions/login@master
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: Send to Azure
       run: |
         az acr login --name $acr_registry
