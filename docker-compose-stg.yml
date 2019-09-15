@@ -1,0 +1,15 @@
+version: "1"
+
+services:
+  webapp:
+    ports:
+    - "80:80"
+    build:
+      context: 
+      - "."
+      dockerfile: 
+      - "Dockerfile.fe"
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.be

@@ -15,8 +15,10 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Run a multi-line script
+    - name: Build
+      run: echo Running build!
+    - name: Build web app
       run: |
         npm install
         npm run build
-        npm run test
+        docker-compose -f ./docker-compose-stg.yml build
