@@ -4,12 +4,12 @@ services:
   webapp:
     ports:
     - "80:80"
+    image: prj2testimage:latest
     build:
-      image: prj2testimage:latest
       context: ./
       dockerfile: Dockerfile.fe
   backend:
+    image: prj2testdbimage:latest
     build:
-      image: prj2testdbimage:latest
       context: .
       dockerfile: Dockerfile.be
