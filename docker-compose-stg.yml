@@ -5,9 +5,11 @@ services:
     ports:
     - "80:80"
     build:
+      image: prj2testimage:latest
       context: ./
       dockerfile: Dockerfile.fe
   backend:
     build:
+      image: prj2testdbimage:latest
       context: .
       dockerfile: Dockerfile.be
