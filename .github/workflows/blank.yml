@@ -12,9 +12,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env:
-      acr_registry: ${{secrets.AZURE_ACR_REGISTRY}}
-      acr_login: ${{secrets.AZURE_ACR_LOGIN_SERVER}}
+    
     steps:
     - uses: actions/checkout@v1
     - name: Build
@@ -30,4 +28,7 @@ jobs:
         docker tag prj2testimage $acr_login/prj2testimage:v1
         docker push $acr_login/prj2testimage:v1
         az acr repository list --name $acr_registry --output table
+      env:
+        acr_registry: ${{secrets.AZURE_ACR_REGISTRY}}
+        acr_login: ${{secrets.AZURE_ACR_LOGIN_SERVER}}
 
