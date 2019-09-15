@@ -6,9 +6,9 @@ services:
     - "80:80"
     build:
       context: 
-      - "."
+      - .
       dockerfile: 
-      - "Dockerfile.fe"
+      - Dockerfile.fe
   backend:
     build:
       context: .
