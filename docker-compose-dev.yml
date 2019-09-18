@@ -29,9 +29,10 @@ services:
       POSTGRES_USER: superpank
       POSTGRES_DB: pankdb
   migration:
-    image: flyway/flyway
-    volumes: 
-    - ./backend-res/migrations:/flyway/sql
+    image: prj2testmigrations:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile.be
     depends_on: 
     - db
     command: -url=jdbc:postgresql://db:5432/pankdb -schemas=api -user=superpank -password=devpassword -connectRetries=60 migrate
