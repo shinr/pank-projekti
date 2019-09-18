@@ -1,9 +1,9 @@
-name: CI
+name: staging
 
 on: 
   push:
     branches:
-    - master
+    - staging
 
 jobs:
   build:
@@ -14,19 +14,20 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build
       run: echo Running build!
+    - uses: azure/actions/login@master
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: Build web app
       run: |
         npm install
         npm run build
-        docker-compose -f ./docker-compose-stg.yml build
-    - uses: azure/actions/login@master
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: Send to Azure
       run: |
         az acr login --name $acr_registry
-        docker tag prj2testimage $acr_login/prj2testimage:v1
-        docker push $acr_login/prj2testimage:v1
+        docker build --file Dockerfile.fe --tag $acr_login/pank_webapp:v1
+        docker build --file Dockerfile.be --tag $acr_login/pank_migrations:v1
+        docker push $acr_login/pank_webapp:v1
+        docker push $acr_login/pank_migrations:v1
         az acr repository list --name $acr_registry --output table
       env:
         acr_registry: ${{secrets.AZURE_ACR_REGISTRY}}
