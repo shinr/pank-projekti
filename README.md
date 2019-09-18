@@ -1,3 +1,24 @@
+# PANK-projekti
+
+## Stack
+
+Ohjelmisto kehitetään seuraavilla työkaluilla:
+
+* reactJS
+* nginx
+* postgREST
+* docker
+
+
+
+## Devaus
+
+Käytössä on kaksi päähaaraa, master ja staging. Master on ns. tuotantohaara ja staging ns. testaushaara. Ideana on, että devaus tapahtuisi omissa brancheissaan, josta tehtäisiin pull requesteja stagingiin. Stagingissa sitten katsottaisiin, miten uusi koodi pelittää lähes oikeassa ympäristössä ja jos ei ongelmia ole, voidaan koodi viedä masteriin jotenkin devopsimaisen automaagisesti.
+
+## Ympäristöt
+
+Testiympäristö on ajossa Azuressa, paitsi jos Jukan rahat loppuu.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

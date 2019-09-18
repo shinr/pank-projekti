@@ -1,0 +1,37 @@
+version: "3.7"
+
+services:
+  webapp:
+    ports:
+    - "8080:80"
+    image: prj2testimage:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile.fe
+  backend:
+    image: postgrest/postgrest
+    ports:
+      - "4000:3000"
+    links:
+      - db:db
+    environment:
+      PGRST_DB_URI: postgres://superpank:devpassword@db:5432/pankdb
+      PGRST_DB_SCHEMA: api
+      PGRST_DB_ANON_ROLE: web_anon #In production this role should not be the same as the one used for the connection
+    depends_on:
+      - db
+  db:
+    image: postgres
+    ports: 
+    - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: devpassword
+      POSTGRES_USER: superpank
+      POSTGRES_DB: pankdb
+  migration:
+    image: flyway/flyway
+    volumes: 
+    - ./backend-res/migrations:/flyway/sql
+    depends_on: 
+    - db
+    command: -url=jdbc:postgresql://db:5432/pankdb -schemas=api -user=superpank -password=devpassword -connectRetries=60 migrate
