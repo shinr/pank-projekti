@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [todos, setTodos ] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+     const result = await fetch('http://localhost:4000/todos')
+     const data = await result.json()
+     setTodos(data)
+    }
+    getData()
+  })
   return (
     <div className="App">
       <header className="App-header">
@@ -19,6 +28,7 @@ function App() {
           Learn React
         </a>
         <p>Also learn to deploy</p>
+        { todos.map((m)=> <div>{m.task}</div>) }
       </header>
     </div>
   );
