@@ -6,7 +6,7 @@ function App() {
   const [todos, setTodos ] = useState([]);
   useEffect(() => {
     const getData = async () => {
-     const result = await fetch('http://localhost:4000/todos')
+     const result = await fetch('https://backend:3000/todos')
      const data = await result.json()
      setTodos(data)
     }
@@ -29,6 +29,7 @@ function App() {
         </a>
         <p>Also learn to deploy</p>
         { todos.map((m)=> <div>{m.task}</div>) }
+      <p>BACKEND: { process.env.REACT_APP_BACKEND_URL }</p>
       </header>
     </div>
   );
