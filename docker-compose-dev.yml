@@ -1,13 +1,13 @@
 version: "3.7"
 
 services:
-  webapp:
-    ports:
-    - "8080:80"
-    image: prj2testimage:latest
-    build:
-      context: ./
-      dockerfile: Dockerfile.fe
+  #webapp:
+  #  ports:
+  #  - "8080:80"
+  #  image: prj2testimage:latest
+  #  build:
+  #    context: ./
+  #    dockerfile: Dockerfile.fe
   backend:
     image: postgrest/postgrest
     ports:
