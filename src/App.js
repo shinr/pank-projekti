@@ -6,7 +6,7 @@ function App() {
   const [todos, setTodos ] = useState([]);
   useEffect(() => {
     const getData = async () => {
-     const result = await fetch('https://backend:3000/todos')
+     const result = await fetch('http://webapp/api/todos')
      const data = await result.json()
      setTodos(data)
     }
