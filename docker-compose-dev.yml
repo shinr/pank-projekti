@@ -8,18 +8,6 @@ services:
   #  build:
   #    context: ./
   #    dockerfile: Dockerfile.fe
-  backend:
-    image: postgrest/postgrest
-    ports:
-      - "4000:3000"
-    links:
-      - db:db
-    environment:
-      PGRST_DB_URI: postgres://superpank:devpassword@db:5432/pankdb
-      PGRST_DB_SCHEMA: api
-      PGRST_DB_ANON_ROLE: web_anon #In production this role should not be the same as the one used for the connection
-    depends_on:
-      - db
   db:
     image: postgres
     ports: 
@@ -28,8 +16,16 @@ services:
       POSTGRES_PASSWORD: devpassword
       POSTGRES_USER: superpank
       POSTGRES_DB: pankdb
-  migration:
+  backend:
     image: prj2testmigrations:latest
+    ports:
+      - "4000:3000"
+    links:
+      - db:db
+    environment:
+      PGRST_DB_URI: postgres://superpank:devpassword@db:5432/pankdb
+      PGRST_DB_SCHEMA: api
+      PGRST_DB_ANON_ROLE: web_anon #In production this role should not be the same as the one used for the connection
     build:
       context: ./
       dockerfile: Dockerfile.be
