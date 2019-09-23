@@ -1,0 +1,23 @@
+name: Tests
+
+on: [pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run frontend build
+      run: | 
+        npm install
+        npm run build
+    - name: Run frontend tests
+      run: |
+        npm run test
+    - name: Run backend migrations
+      run: |
+        docker run --name temppostgres --detach postgres/postgres
+        docker run $(docker build --quiet --file Dockerfile.be --tag temporary_pank_migrations:v1 .)
+        docker stop temppostgres
