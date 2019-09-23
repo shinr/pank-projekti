@@ -1,37 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+
+import News from './views/news'
+import Main from './views/main'
+import Contact from './views/contact'
+
 import './App.css';
 
 function App() {
-  const [todos, setTodos ] = useState([]);
-  useEffect(() => {
-    const getData = async () => {
-     const result = await fetch('/api/todos')
-     const data = await result.json()
-     setTodos(data)
-    }
-    getData()
-  })
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.!!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <p>Also learn to deploy</p>
-        { todos.map((m)=> <div>{m.task}</div>) }
-      <p>BACKEND: { process.env.REACT_APP_BACKEND_URL }</p>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <header className="App-header">
+          <span><Link to="/">Koti</Link></span>
+          <span><Link to="/news">Uutiset</Link></span>
+          <span><Link to="/contact">Ota yhteyttä</Link></span>
+        </header>
+        <main className="App-main">
+          <Switch>
+            <Route path='/news' component={News} />
+            <Route path='/contact' component={Contact} />
+            <Route path='/' component={Main} />
+          </Switch>
+        </main>
+        <footer className="App-footer">
+          We love you
+        </footer>
+      </div>
+    </BrowserRouter>
   );
 }
 
