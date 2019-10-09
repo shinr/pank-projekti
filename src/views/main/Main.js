@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 export function Main() {
     return (
-        <section>Tervetuloa PANKKIIN!</section>
+        <section>Tervetuloa PANK ryn uudistetuille kotisivuille!</section>
     );
 }
 
