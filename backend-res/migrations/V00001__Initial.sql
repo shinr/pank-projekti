@@ -1,17 +1,16 @@
-create table api.todos (
+create table api.news (
   id serial primary key,
-  done boolean not null default false,
-  task text not null,
-  due timestamptz
+  headline text not null,
+  posted timestamptz
 );
 
-insert into api.todos (task) values
-  ('finish tutorial 0'), ('pat self on back');
+insert into api.news (headline) values
+  ('Hallituksen kokous'), ('Tiedote tärkeästä asiasta');
 
 create role web_anon nologin;
 
 grant usage on schema api to web_anon;
-grant select on api.todos to web_anon;
+grant select on api.news to web_anon;
 
 create role authenticator noinherit login password 'mysecretpassword';
 grant web_anon to authenticator;
