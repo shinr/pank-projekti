@@ -1,2 +1,2 @@
-insert into api.news (task) values
+insert into api.news (headline) values
   ('Lisää tiedotteita'), ('Teiden suolaus aiheuttaa muutoksia');

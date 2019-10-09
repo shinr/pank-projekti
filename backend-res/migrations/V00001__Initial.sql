@@ -4,7 +4,7 @@ create table api.news (
   posted timestamptz
 );
 
-insert into api.news (task) values
+insert into api.news (headline) values
   ('Hallituksen kokous'), ('Tiedote tärkeästä asiasta');
 
 create role web_anon nologin;

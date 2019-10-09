@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
+
+import NewsList from "../../components/news/NewsList"
 import { BACKEND_URL } from '../../services/api';
 
 export function News() {
-    const [todos, setTodos] = useState([]);
+    const [news, setNews] = useState([]);
     useEffect(() => {
         const getData = async () => {
-            const result = await fetch(`${BACKEND_URL}/todos`)
+            const result = await fetch(`${BACKEND_URL}/news`)
             const data = await result.json()
-            setTodos(data)
+            setNews(data)
         }
         getData()
     })
     return (
-        <section>{ todos.map((m) => <div>{m.task}</div>) }</section>
+        <section>
+            <NewsList news={news} />
+        </section>
     );
 }
 

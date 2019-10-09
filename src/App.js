@@ -12,15 +12,15 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <header className="App-header">
-          <span><Link to="#">Koti</Link></span>
-          <span><Link to="#/news">Uutiset</Link></span>
-          <span><Link to="#/contact">Ota yhteyttä</Link></span>
+          <span><Link to="/">Koti</Link></span>
+          <span><Link to="/news">Uutiset</Link></span>
+          <span><Link to="/contact">Ota yhteyttä</Link></span>
         </header>
         <main className="App-main">
           <Switch>
-            <Route path='#/news' component={News} />
-            <Route path='#/contact' component={Contact} />
-            <Route path='#' component={Main} />
+            <Route path='/news' component={News} />
+            <Route path='/contact' component={Contact} />
+            <Route path='/' component={Main} />
           </Switch>
         </main>
         <footer className="App-footer">
