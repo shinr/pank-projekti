@@ -9,7 +9,10 @@ services:
   #    context: ./
   #    dockerfile: Dockerfile.fe
   db:
-    image: postgres
+    image: postgres12devdb:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile.db
     ports: 
     - "5432:5432"
     environment:
@@ -30,6 +33,7 @@ services:
       POSTGRES_PASSWORD: devpassword
       POSTGRES_USER: superpank
       POSTGRES_DB: pankdb
+      JWT_SECRET: JosHevonenMeneePankkiin130KertaaMontakoKertaaSeON!?
     build:
       context: ./
       dockerfile: Dockerfile.be

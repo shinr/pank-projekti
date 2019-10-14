@@ -3,7 +3,7 @@ FROM postgrest/postgrest
 USER 0
 
 RUN apt-get update && \
-    apt-get -y install curl netcat
+    apt-get -y install curl
 
 RUN curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/6.0.3/flyway-commandline-6.0.3-linux-x64.tar.gz | tar xvz && ln -s `pwd`/flyway-6.0.3/flyway /usr/local/bin
 
