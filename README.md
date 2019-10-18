@@ -5,19 +5,51 @@
 Ohjelmisto kehitetään seuraavilla työkaluilla:
 
 * reactJS
+    * create-react-app
 * nginx
 * postgREST
 * docker
-
-
+* postgreSQL
 
 ## Devaus
 
-Käytössä on kaksi päähaaraa, master ja staging. Master on ns. tuotantohaara ja staging ns. testaushaara. Ideana on, että devaus tapahtuisi omissa brancheissaan, josta tehtäisiin pull requesteja stagingiin. Stagingissa sitten katsottaisiin, miten uusi koodi pelittää lähes oikeassa ympäristössä ja jos ei ongelmia ole, voidaan koodi viedä masteriin jotenkin devopsimaisen automaagisesti.
+Devataan omissa brancheissa ja kamat viedään pull requestin kautta masteriin Githubissa. Eli siis git pull uusin versio masterista, luodaan oma branch, tehdään muutokset, haetaan vielä varalle uusin master ja rebasetetaan oma branchi sen päälle. Sitten pushataan kamppeet remoteen ja tehdään pull request. Pullarin yhteydessä pyörähtää testit ja kunhan ne menevät läpi, voidaan mergettää. Mergestä sitten pyörähtää läpi deployment, joka ajaa uusimmat muutokset sitten Azuren testiympäristöön.
+
+## API
+
+Seuraavat rajapinnat on tarjolla
+
+### Anonyymit
+
+#### /login
+`{email: string, pass: string}`
+Kirjaa käyttäjän
+
+### Authin vaativat
+
+#### /register
+`{email: string, pass: string, realname: string}`
+Luo uuden käyttäjän annetuilla tiedoilla
+
+#### /create_role
+`{new_role: string}`
+Luo käyttäjätason roolin ilman oikeuksia
+
+#### /activate_user
+`{id: integer}`
+Aktivoi käyttäjän
+
+#### /grant_privileges
+`{id: integer, new_role: string}`
+Antaa käyttäjälle <id> roolin <new_role>, jos sellainen on olemassa
+
+#### /change_password
+`not implemented`
 
 ## Ympäristöt
 
 Testiympäristö on ajossa Azuressa, paitsi jos Jukan rahat loppuu.
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -57,33 +89,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
