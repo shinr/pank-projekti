@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 
+import NavBar from './ui/navbar'
 import News from './views/news'
 import Main from './views/main'
 import Contact from './views/contact'
@@ -12,9 +13,11 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <header className="App-header">
-          <span><Link to="/">Koti</Link></span>
-          <span><Link to="/news">Uutiset</Link></span>
-          <span><Link to="/contact">Ota yhteyttä</Link></span>
+          <NavBar>
+            <Link to="/">Koti</Link>
+            <Link to="/news">Uutiset</Link>
+            <Link to="/contact">Ota yhteyttä</Link>
+          </NavBar>
         </header>
         <main className="App-main">
           <Switch>

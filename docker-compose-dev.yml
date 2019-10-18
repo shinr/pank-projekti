@@ -9,13 +9,17 @@ services:
   #    context: ./
   #    dockerfile: Dockerfile.fe
   db:
-    image: postgres
+    image: postgres12devdb:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile.db
     ports: 
     - "5432:5432"
     environment:
       POSTGRES_PASSWORD: devpassword
       POSTGRES_USER: superpank
       POSTGRES_DB: pankdb
+      JWT_SECRET: JosHevonenMeneePankkiin130KertaaMontakoKertaaSeON!?
   backend:
     image: prj2testmigrations:latest
     ports:
@@ -26,6 +30,7 @@ services:
       POSTGRES_URI: jdbc:postgresql://db:5432/pankdb
       PGRST_DB_URI: postgres://superpank:devpassword@db:5432/pankdb
       PGRST_DB_SCHEMA: api
+      PGRST_JWT_SECRET: JosHevonenMeneePankkiin130KertaaMontakoKertaaSeON!?
       PGRST_DB_ANON_ROLE: web_anon #In production this role should not be the same as the one used for the connection
       POSTGRES_PASSWORD: devpassword
       POSTGRES_USER: superpank

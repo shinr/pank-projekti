@@ -1,0 +1,9 @@
+.navbutton {
+    background-color:white;
+    padding:15px;
+    text-transform: capitalize;
+}
+
+.navbutton:hover {
+    background-color:grey;
+}
