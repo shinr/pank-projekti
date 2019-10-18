@@ -47,10 +47,10 @@ grant web_anon to authenticator;
 create role new_user noinherit;
 grant usage on schema api to new_user;
 
-create role user noinherit;
-grant usage on schema api to user;
+create role activated_user noinherit;
+grant usage on schema api to activated_user;
 
-grant new_user, user to authenticator;
+grant new_user, activated_user to authenticator;
 
 -- Admin roles
 
@@ -139,7 +139,6 @@ begin
 end;
 $$ language plpgsql security definer;
 
-
 -- need auth admin level
 create or replace function
 api.create_role(new_role name) returns boolean as $$
@@ -150,47 +149,59 @@ begin
     -- check auth is admin
     select current_setting('request.jwt.claim.role') into _role;
     select current_setting('request.jwt.claim.email') into _email;
-    if _role is not 'administrator' then
-        raise invalid_password using message = 'not authorized'
+    if not _role = 'administrator' then
+        raise invalid_password using message = 'not authorized';
     end if;
-    create role new_role inherit in role user;
-    grant to authenticator new_role;
+    execute format('create role %I inherit in role activated_user', new_role);
+    execute format('grant %I to authenticator', new_role);
     return TRUE;
 end;    
-$$ language plpgsql;
+$$ language plpgsql security definer;
+
+revoke all privileges on function api.create_role(new_role name) from public;
+grant execute on function api.create_role(new_role name) to administrator;
 
 -- REMEMBER TO REVOKE revoke all privileges on function create_role() from public;
 -- grant execute on function create_role() to administrator;
 
 -- needs moderator auth
 create or replace function
-api.activate_user(id int) returns boolean as $$
+api.activate_user(id int) returns int as $$
 declare 
+    given_id alias for id;
     _id int;
 begin
-    select users.id from basic_auth.users where users.id = id into _id;
+    select users.id from basic_auth.users where users.id = given_id into _id;
     if _id is null then
-        raise invalid_password using message = 'user not found'
+        raise invalid_password using message = 'user not found';
     end if;
-    update basic_auth.users set users.activated = TRUE where users.id = id;
+    update basic_auth.users set activated = TRUE where users.id = given_id;
+    return given_id;
 end;
-$$ language plpgsql;
+$$ language plpgsql security definer;
+
+revoke all privileges on function api.activate_user(id int) from public;
+grant execute on function api.activate_user(id int) to administrator;
 
 -- needs auth at least moderator level
 create or replace function
-api.grant_privileges(id int, new_role name) returns text as $$
+api.grant_privileges(id int, new_role name) returns int as $$
 declare
+    given_id alias for id;
     _id int;
 begin
-    select users.id from basic_auth.users where users.id = id into _id;
+    select users.id from basic_auth.users where users.id = given_id into _id;
     if _id is null then
-        raise invalid_password using message = 'user not found'
+        raise invalid_password using message = 'user not found';
     end if;
-    update basic_auth.users set users.role = new_role where users.id = id;
+    update basic_auth.users set role = new_role where users.id = given_id;
+    return given_id;
 end;
-$$ language plpgsql;
+$$ language plpgsql security definer; 
 
--- usable by anons
+revoke all privileges on function api.grant_privileges(id int, new_role name) from public;
+grant execute on function api.grant_privileges(id int, new_role name) to administrator;
+
 create or replace function
 api.register(usermail text, pass text, realname text) returns text as $$
 declare
@@ -198,7 +209,7 @@ declare
     result text;
 begin
     select users.email as _email from basic_auth.users where users.email = usermail into _existing_user;
-    if _existing_user is not null then
+    if not _existing_user is null then
         raise unique_violation using message = 'user already exists';
     end if;
 
@@ -209,6 +220,9 @@ begin
 end;
 $$ language plpgsql security definer;
 
+revoke all privileges on function api.register(usermail text, pass text, realname text) from public;
+grant execute on function api.register(usermail text, pass text, realname text) to administrator;
+
 -- Initial admin user that must change his password
 insert into basic_auth.users (realname, email, pass, role, activated, password_change_needed) values
-('Pääkäyttäjä', 'null', 'immediatlychangethis', 'administrator', TRUE, TRUE);
+('Pääkäyttäjä', 'null@dev.com', 'immediatlychangethis', 'administrator', TRUE, TRUE);

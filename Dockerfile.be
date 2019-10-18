@@ -10,8 +10,9 @@ RUN curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/6.0.3
 COPY ./backend-res/migrations/*.sql /flyway/sql/
 
 COPY ./backend-res/migrate-and-postgrest.sh /postgrest/migrate-and-postgrest.sh
+
 RUN chmod +x /postgrest/migrate-and-postgrest.sh && \
-    chmod +x /usr/local/bin/flyway
+    chmod +x /usr/local/bin/flyway 
 
 USER 1000
 
