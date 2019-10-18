@@ -24,8 +24,10 @@ jobs:
     - name: Send to Azure.
       run: |
         az acr login --name $acr_registry
+        docker build --file Dockerfile.db --tag $acr_login/pank_db:v1 .
         docker build --file Dockerfile.fe --tag $acr_login/pank_webapp:v1 .
         docker build --file Dockerfile.be --tag $acr_login/pank_migrations:v1 .
+        docker push $acr_login/pank_db:v1
         docker push $acr_login/pank_webapp:v1
         docker push $acr_login/pank_migrations:v1
         az acr repository list --name $acr_registry --output table
