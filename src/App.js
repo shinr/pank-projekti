@@ -27,7 +27,9 @@ function App() {
           </Switch>
         </main>
         <footer className="App-footer">
-          We love you
+          {process.env.REACT_APP_DEVELOPMENT
+            ? <div>DEVELOPMENTAL VERSION</div>
+            : <div>TEST VERSION</div>}
         </footer>
       </div>
     </BrowserRouter>
