@@ -10,14 +10,17 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Run frontend build
-      run: | 
+      run: |
+        ls 
         npm install
         npm run build
     - name: Run frontend tests
       run: |
         npm run test
+      env:
+        CI: true
     - name: Run backend migrations
       run: |
-        docker run --name temppostgres --detach postgres
-        docker run $(docker build --quiet --file Dockerfile.be --tag temporary_pank_migrations:v1 .)
+        docker run --name temppostgres -e POSTGRES_PASSWORD=testpass --detach postgres:11
+        docker run $(docker build --quiet --file Dockerfile.migrate --tag temporary_pank_migrations:v1 .)
         docker stop temppostgres
