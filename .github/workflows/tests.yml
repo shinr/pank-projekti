@@ -18,6 +18,6 @@ jobs:
         npm run test
     - name: Run backend migrations
       run: |
-        docker run --name temppostgres --detach postgres/postgres
+        docker run --name temppostgres --detach postgres
         docker run $(docker build --quiet --file Dockerfile.be --tag temporary_pank_migrations:v1 .)
         docker stop temppostgres
