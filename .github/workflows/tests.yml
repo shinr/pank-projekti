@@ -10,7 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Run frontend build
-      run: | 
+      run: |
+        ls 
         npm install
         npm run build
     - name: Run frontend tests
