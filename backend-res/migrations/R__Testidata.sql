@@ -1,2 +1,2 @@
-insert into api.news (headline) values
-  ('Lisää tiedotteita'), ('Teiden suolaus aiheuttaa muutoksia');
+insert into api.news (headline, posted_by, content) values
+  ('Lisää tiedotteita', 1, 'Nyt on hieno hiihtoreissu tulossa. Mikäli asfaltti kestää, mennään hiihtämään hiihtobussilla hiihtokeskukseen. Jos asfaltin päällysteissä on puutteita, joudutaan ne korjaamaan matkan varrella. Siksi menemme asfalttityökoneella.'), ('Teiden suolaus aiheuttaa muutoksia', 1, 'Teitä suolataan.  Harmillisesti se tapahtui liian suolaisesti. Nyt siis teitä on suolattu liikaa joten lisätään vettä asfaltille.');
