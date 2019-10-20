@@ -26,5 +26,6 @@ jobs:
         docker build --file Dockerfile.migrate --tag temporarypankmigrations:v1 .
         docker run --name temppostgres -e POSTGRES_PASSWORD=testpass -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres -e JWT_SECRET=testifraasitestifraasitestifraasitesti --network testnetwork -p 5432:5432 --detach temporarypankdbs:v1
         sleep 20
+        PGPASSWORD=testpass psql -U postgres -h localhost -p 5432 -d postgres -c "create schema if not exists api"
         docker run --network testnetwork temporarypankmigrations:v1
         docker stop temppostgres
