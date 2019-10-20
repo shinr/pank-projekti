@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Setup
-      run: apt-get install -y postgres
+      run: sudo apt-get install -y postgres
     - name: Run frontend build
       run: |
         ls 
