@@ -2,5 +2,5 @@ FROM flyway/flyway
 
 COPY ./backend-res/migrations/*.sql /flyway/sql/
 
-CMD ["-url=jdbc:postgresql://localhost:5432/postgres", "-user=postgres", "-password=testpass", "migrate"]
+CMD ["-url=jdbc:postgresql://temppostgres:5432/postgres", "-user=postgres", "-password=testpass", "migrate"]
 
