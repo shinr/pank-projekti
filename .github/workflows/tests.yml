@@ -22,6 +22,8 @@ jobs:
     - name: Run backend migrations
       run: |
         docker network create testnetwork
-        docker run --name temppostgres -e POSTGRES_PASSWORD=testpass --network testnetwork -p 5432:5432 --detach  $(docker build --file Dockerfile.db --tag temporarypankdbs:v1 .)
-        docker run --network testnetwork $(docker build --file Dockerfile.migrate --tag temporarypankmigrations:v1 .)
+        docker build --file Dockerfile.db --tag temporarypankdbs:v1 .
+        docker build --file Dockerfile.migrate --tag temporarypankmigrations:v1 .
+        docker run --name temppostgres -e POSTGRES_PASSWORD=testpass --network testnetwork -p 5432:5432 --detach temporarypankdbs
+        docker run --network testnetwork temporarypankmigrations
         docker stop temppostgres
