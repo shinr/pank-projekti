@@ -21,6 +21,6 @@ jobs:
         CI: true
     - name: Run backend migrations
       run: |
-        docker run --name temppostgres -e POSTGRES_PASSWORD=testpass --detach postgres:11
-        docker run $(docker build --quiet --file Dockerfile.migrate --tag temporary_pank_migrations:v1 .)
+        docker run --name temppostgres -e POSTGRES_PASSWORD=testpass --network testnetwork -p 5432:5432 --detach postgres:11
+        docker run --network testnetwork $(docker build --quiet --file Dockerfile.migrate --tag temporary_pank_migrations:v1 .)
         docker stop temppostgres
