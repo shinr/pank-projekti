@@ -24,6 +24,6 @@ jobs:
         docker network create testnetwork
         docker build --file Dockerfile.db --tag temporarypankdbs:v1 .
         docker build --file Dockerfile.migrate --tag temporarypankmigrations:v1 .
-        docker run --name temppostgres -e POSTGRES_PASSWORD=testpass --network testnetwork -p 5432:5432 --detach temporarypankdbs
-        docker run --network testnetwork temporarypankmigrations
+        docker run --name temppostgres -e POSTGRES_PASSWORD=testpass --network testnetwork -p 5432:5432 --detach temporarypankdbs:v1
+        docker run --network testnetwork temporarypankmigrations:v1
         docker stop temppostgres
