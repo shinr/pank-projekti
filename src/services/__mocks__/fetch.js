@@ -16,6 +16,7 @@ const getMockPromise = (response) => Promise.resolve(response)
 // goodCase is some simple function (like () => true) that determines if with given params a good or a bad result should be returned.
 const mockFactory = (response, goodCase) => (uri, params) => {
     return getMockPromise({
+        ok: goodCase(uri, params) ? true : false,
         json:
             () => getMockPromise(goodCase(uri, params) ? response.good : response.bad)
     })
