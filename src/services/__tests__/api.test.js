@@ -15,10 +15,10 @@ it('Attempts login', async () => {
     jest.spyOn(global, 'fetch').mockImplementation(fetchMock("login"))
 
     const good = await login("testaaja@testaaja.com", "testisana")
-    const bad = await login("testi@testi.com", "testisana")
+    const bad = await login("wrong@testi.com", "wrongsana")
 
-    expect(good).toEqual({ token: "TOKEN" })
-    expect(bad).toEqual({ code: "28P01" })
+    expect(good).toEqual({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IlRPS0VOIn0.DbozeWRU75tEHgFJrD4LH3iFyYZC4TL1ww1Tc0AdYWk" })
+    expect(bad).toEqual({ bad: true })
 
     global.fetch.mockClear()
 })
