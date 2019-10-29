@@ -28,7 +28,7 @@ function App() {
         </main>
         <footer className="App-footer">
           {process.env.REACT_APP_DEVELOPMENT
-            ? <div>DEVELOPMENTAL VERSION</div>
+            ? <div>DEVELOPMENTAL VERSION!</div>
             : <div>TEST VERSION</div>}
         </footer>
       </div>
