@@ -1,11 +1,18 @@
 import { first } from "../utils/clojure"
 import { decodePayload } from "../utils/jwt"
+import { urlBuilder } from "../utils/url"
+import { isEmpty } from "../utils/general"
+import { saveAs } from "file-saver"
 
 export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
+// the api routes - correspond to api/<string> or api/<identifier>/<endPoint> for accessing stored procedures
 const apiHierarchy = {
     news: "news",
-    login: { endPoint: "login", identifier: "rpc" }
+    login: { endPoint: "login", identifier: "rpc" },
+    events: "events",
+    documents: "documents",
+    userInfo: { endPoint: "user_info", identifier: "rpc" }
 }
 
 // default error handlers, defaultError . can be overriden by supplying
@@ -15,7 +22,6 @@ const defaultHandler = err => {
     console.error("Tehtiin silleen tymästi että tuli ", err)
     return [{ bad: true }]
 }
-
 
 // actual functions that do interactions with the API
 
@@ -27,22 +33,27 @@ const apiCall = async (url, parameters, options) => {
         return onError(result) 
     }
 
-    const data = await result.json()
+    const data = await options.blob ? result.blob() : result.json()
     return data
 }
 
-const getHelper = async (apiName, additionalParameters = {}, options = {}) => {
+// GET
+const getHelper = async (apiName, urlParameters = {}, additionalParameters = {}, options = {}) => {
     const { errorHandler, onError } = options
     const defaultParameters = { method: "GET" }
     const parameters = Object.assign({}, defaultParameters, additionalParameters)
     const url = typeof apiName === "object" ? `${apiName.identifier}/${apiName.endPoint}` : apiName
+    const urlWithParameters = isEmpty(urlParameters) ? url : url.concat(urlBuilder(urlParameters))
+    const mergedOptions = Object.assign({}, { onError: onError || defaultError }, options)
+
     try {
-        return await apiCall(`${BACKEND_URL}/${url}`, parameters, { onError: onError || defaultError })
+        return await apiCall(`${BACKEND_URL}/${urlWithParameters}`, parameters, mergedOptions)
     } catch (error) {
         return errorHandler ? errorHandler(error) : defaultHandler(error)
     }
 }
 
+// POST
 const postHelper = async (apiName, body, additionalParameters = {}, options = {}) => {
     const { errorHandler, onError } = options
     const defaultParameters = {
@@ -52,8 +63,10 @@ const postHelper = async (apiName, body, additionalParameters = {}, options = {}
     }
     const parameters = Object.assign({}, defaultParameters, additionalParameters)
     const url = typeof apiName === "object" ? `${apiName.identifier}/${apiName.endPoint}` : apiName
+    const mergedOptions = Object.assign({}, { onError: onError || defaultError }, options)
+    
     try {
-        return await apiCall(`${BACKEND_URL}/${url}`, parameters, { onError: onError || defaultError })
+        return await apiCall(`${BACKEND_URL}/${url}`, parameters, mergedOptions)
     } catch (error) {
         return errorHandler ? errorHandler(error) : defaultHandler(error)
     }
@@ -73,4 +86,33 @@ export const login = async (email, password) => {
     }))
     const { token, bad } = loginData;
     return bad ? loginData : { ...decodePayload(token), token:token }
+}
+
+export const getUserInfo = async (id) => {
+    const userData = first(await postHelper(apiHierarchy.userInfo, {
+        id: id
+    }))
+    return userData
+}
+
+export const getEvent = async (id) => {}
+
+export const getEvents = async () => {
+    const events = await getHelper(apiHierarchy.events)
+    // TODO also fetch user info
+    //const userData = await getUserInfo()
+    return events
+}
+
+export const getDocument = async (id, fileName) => {
+    const urlParameters = 
+    { select: "filedata",
+    id: { is: id } }
+    const headers = { "Accept": "application/octet-stream" }
+    const blob = await getHelper(apiHierarchy.documents, urlParameters, { headers: headers }, { blob: true })
+    saveAs(blob, fileName)
+}
+
+export const getDocuments = async () => {
+    return await getHelper(apiHierarchy.documents)
 }

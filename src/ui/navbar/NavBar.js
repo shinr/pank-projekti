@@ -1,6 +1,6 @@
 import React from "react"
 
-import { UserStateProvider, UserStateContext, useUserStateValue } from "../../state/state"
+import { UserStateProvider } from "../../state/state"
 import { userReducer } from "../../state/reducers"
 import NavButton from "../../components/navbar/NavButton"
 import Login from "../login"
