@@ -1,8 +1,11 @@
 import React from 'react';
+import EventCalendar from '../../ui/events';
 
 export function Main() {
     return (
-        <section>Tervetuloa PANK ryn uudistetuille kotisivuille!</section>
+        <section>
+            <EventCalendar />
+            Tervetuloa PANK ryn uudistetuille kotisivuille!</section>
     );
 }
 
