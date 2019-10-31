@@ -29,7 +29,7 @@ it('Gets user info by id', async () => {
     const good = await getUserInfo(1)
     const bad = await getUserInfo(2)
 
-    expect(good).toContainEqual({ email: "testiteppo@gmail.com", realname: "Testiteppo Testaaja"})
+    expect(good).toEqual({ email: "testiteppo@gmail.com", realname: "Testiteppo Testaaja"})
     expect(bad).toEqual({ bad: true })
 
     global.fetch.mockClear()
