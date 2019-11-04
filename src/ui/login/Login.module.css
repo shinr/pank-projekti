@@ -1,0 +1,10 @@
+.login_button {
+    margin-left:auto;
+}
+
+.login_form {
+    position: absolute;
+    background-color:white;
+    right:0px;
+    top:64px;
+}
