@@ -2,6 +2,7 @@ import React from 'react';
 import { HashRouter, Route, Link, Switch } from 'react-router-dom';
 
 import NavBar from './ui/navbar'
+import Footer from "./ui/footer"
 import News from './views/news'
 import Main from './views/main'
 import Contact from './views/contact'
@@ -30,9 +31,7 @@ function App() {
           </Switch>
         </main>
         <footer className="App-footer">
-          {process.env.REACT_APP_DEVELOPMENT
-            ? <div>DEVELOPMENTAL VERSION!</div>
-            : <div>TEST VERSION</div>}
+          <Footer />
         </footer>
       </div>
     </HashRouter>

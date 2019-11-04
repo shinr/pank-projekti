@@ -2,8 +2,22 @@
     background-color:white;
     padding:15px;
     text-transform: capitalize;
+    border-style: solid; 
+    border-color: #cccccc;
+    border-width: 0px 1px 0px 0px;
+}
+
+.navbutton:first-of-type {
+    border-width: 0px 1px 0px 1px;
+}
+
+.navbutton a {
+    color: #333333;
+    text-decoration: none;
+    font-size: 18px;
+    text-transform: uppercase;
 }
 
 .navbutton:hover {
-    background-color:grey;
+    background-color:lightgrey;
 }
