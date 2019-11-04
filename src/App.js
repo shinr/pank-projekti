@@ -10,6 +10,8 @@ import Documents from './views/documents'
 
 import './App.css';
 
+import backgroundImage from "./images/frontpage.jpg"
+
 function App() {
   return (
     <HashRouter>

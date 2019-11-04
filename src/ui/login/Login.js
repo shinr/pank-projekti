@@ -13,7 +13,7 @@ export const Login = (props) => {
     const [loginInfo, setLogin] = useState({ email: null, password: null })
     return (<>
         <NavButton classes={[styles.login_button]}>
-            <div onClick={() => openLoginForm(!loginFormOpen)}>Open</div>
+            <div onClick={() => openLoginForm(!loginFormOpen)}>Kirjaudu</div>
         </NavButton>
         {loginFormOpen &&
             <div className={styles.login_form}>
