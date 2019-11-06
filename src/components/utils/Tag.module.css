@@ -1,0 +1,13 @@
+.tag {
+    background: lightslategray;
+    border: 1px solid lightslategray;
+    border-radius: 15px;
+    padding: 2px 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.tag:hover {
+    background: lightblue;
+    cursor: pointer;
+}
