@@ -1,5 +1,7 @@
 import React from 'react';
 import { HashRouter, Route, Link, Switch } from 'react-router-dom';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCheckSquare, faBars, faCaretDown, faCaretRight, faUser } from '@fortawesome/free-solid-svg-icons'
 
 import NavBar from './ui/navbar'
 import Footer from "./ui/footer"
@@ -10,9 +12,9 @@ import Documents from './views/documents'
 
 import './App.css';
 
-import backgroundImage from "./images/frontpage.jpg"
-
 function App() {
+  // add fontawesome icons into the library, are used with FontAwesomeIcon icon="" -component
+  library.add(faCheckSquare, faBars, faCaretDown, faCaretRight, faUser)
   return (
     <HashRouter>
       <div className="App">

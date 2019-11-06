@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { TextInputField } from "../../components/form/TextInputField"
 import { LoginButton } from "../../components/form/LoginButton.js"
@@ -13,7 +14,11 @@ export const Login = (props) => {
     const [loginInfo, setLogin] = useState({ email: null, password: null })
     return (<>
         <NavButton classes={[styles.login_button]}>
-            <div onClick={() => openLoginForm(!loginFormOpen)}>Kirjaudu</div>
+            <div
+            className={styles.login_button} 
+            onClick={() => openLoginForm(!loginFormOpen)}>
+                <FontAwesomeIcon icon="user" /> Kirjaudu
+            </div>
         </NavButton>
         {loginFormOpen &&
             <div className={styles.login_form}>
