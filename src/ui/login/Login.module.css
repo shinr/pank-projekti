@@ -1,5 +1,12 @@
 .login_button {
-    margin-left:auto;
+
+    background-color:white;
+    text-transform: uppercase;
+    color: #767676;
+    text-decoration: none;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin: auto 0px auto auto;
 }
 
 .login_form {

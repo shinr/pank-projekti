@@ -10,7 +10,7 @@ import styles from "./NavBar.module.css"
 export const NavBar = ({ children }) => {
     return (
         <nav className={styles.navbar}>
-            <div className={styles.pank_logo}>PANK</div>
+            <div className={styles.pank_logo}>PANK ry</div>
             {children.map((navItem) =>
                 <NavButton component={navItem} />)}
             <UserStateProvider initialState={{ user: null, role: null, token: null }} reducer={userReducer}>
