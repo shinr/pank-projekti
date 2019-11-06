@@ -1,13 +1,28 @@
 import React, { useState } from "react"
 
 import { getDocument } from "../../services/api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const DocumentCard = ({headline, content, fileId, fileName}) => {
-    const [ expanded, expand ] = useState(false)
+import styles from "./DocumentCard.module.css"
 
-    return <div>
-        <label onClick={() => expand(!expanded)}>{headline} (näytä lisää)</label>
-        { expanded ? <div>{content}<div onClick={() => getDocument(fileId, fileName)}>lataa file</div></div> : <div></div>}
+export const DocumentCard = ({ headline, content, fileId, fileName, tag }) => {
+    const preventStopAnd = (e, fn) => {
+        e.preventDefault()
+        e.stopPropagation()
+        return fn()
+    }
+    const [expanded, expand] = useState(false)
+    return <div className={styles.documentcard}>
+        <label>
+            <span>{headline}</span>
+            <button onClick={() => expand(!expanded)}>
+                <FontAwesomeIcon icon={expanded ? "caret-down" : "caret-right"} />
+            </button>
+            <button onClick={(e) => preventStopAnd(e, () => getDocument(fileId, fileName))}>
+                <FontAwesomeIcon icon="download" />
+            </button>
+        </label>
+        {expanded ? <div className={styles.documentcard__content}>{content}<div onClick={() => getDocument(fileId, fileName)}>lataa file</div></div> : <div></div>}
     </div>
 }
 

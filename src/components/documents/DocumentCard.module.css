@@ -1,0 +1,29 @@
+.documentcard {
+    border: 1px solid #cdcdcd;
+}
+
+.documentcard label {
+    display:flex;
+    flex-direction:row;
+    justify-content: flex-end;
+    align-items:center;
+    background: #efefef;
+    padding: 7px 15px;
+}
+
+.documentcard label span {
+    flex-grow: 1;
+}
+
+.documentcard label button {
+    border:1px solid #dfdfdf;
+    padding: 7px;
+    width:32px;
+    height:32px;
+    margin:0px 7px;
+}
+
+.documentcard__content {
+    padding:7px 15px;
+    background: white;
+}

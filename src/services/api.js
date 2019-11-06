@@ -114,5 +114,6 @@ export const getDocument = async (id, fileName) => {
 }
 
 export const getDocuments = async () => {
-    return await getHelper(apiHierarchy.documents)
+    const documents = await getHelper(apiHierarchy.documents)
+    return first(documents).hasOwnProperty("bad") ? first(documents) : documents
 }
