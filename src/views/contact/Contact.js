@@ -1,8 +1,11 @@
 import React from 'react';
 
+import styles from "../views.module.css"
+
 export function Contact() {
     return (
-        <section>
+        <section className={styles.general_row}>
+        <section className={styles.general_column}>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sagittis eu volutpat odio facilisis. Blandit turpis cursus in hac habitasse platea dictumst quisque sagittis. Enim sit amet venenatis urna cursus. Ullamcorper eget nulla facilisi etiam. Ut etiam sit amet nisl purus. Vel fringilla est ullamcorper eget nulla. Feugiat nibh sed pulvinar proin gravida hendrerit. Lobortis scelerisque fermentum dui faucibus in ornare. Mattis nunc sed blandit libero volutpat sed cras ornare. Mi in nulla posuere sollicitudin. Ac tincidunt vitae semper quis lectus nulla. Egestas congue quisque egestas diam in. Auctor neque vitae tempus quam pellentesque nec nam aliquam sem.</p>
 
             <p>Turpis cursus in hac habitasse platea dictumst quisque sagittis purus. Lacus sed viverra tellus in hac. Porttitor massa id neque aliquam vestibulum. Viverra orci sagittis eu volutpat odio. Pellentesque elit eget gravida cum sociis natoque. Volutpat diam ut venenatis tellus in. Ac odio tempor orci dapibus ultrices in iaculis nunc sed. Pellentesque adipiscing commodo elit at imperdiet dui. Id volutpat lacus laoreet non. Etiam sit amet nisl purus in mollis nunc sed id. Nunc id cursus metus aliquam eleifend mi. Cras fermentum odio eu feugiat pretium. Nibh tortor id aliquet lectus proin. Ornare quam viverra orci sagittis. Aliquet bibendum enim facilisis gravida neque. Vitae sapien pellentesque habitant morbi tristique senectus et netus et. Lorem mollis aliquam ut porttitor leo a diam sollicitudin.</p>
@@ -12,7 +15,8 @@ export function Contact() {
             <p>Pellentesque pulvinar pellentesque habitant morbi tristique senectus et netus. Eget nulla facilisi etiam dignissim diam quis enim lobortis scelerisque. Viverra nam libero justo laoreet sit amet cursus sit. Adipiscing vitae proin sagittis nisl rhoncus mattis. Aliquam vestibulum morbi blandit cursus risus at ultrices mi tempus. Mattis vulputate enim nulla aliquet porttitor lacus. Vulputate odio ut enim blandit. Pellentesque diam volutpat commodo sed egestas. Laoreet non curabitur gravida arcu ac tortor dignissim. Sed vulputate odio ut enim. Facilisis sed odio morbi quis commodo odio aenean. Vulputate enim nulla aliquet porttitor lacus luctus accumsan. Tincidunt lobortis feugiat vivamus at augue eget arcu dictum varius. Scelerisque varius morbi enim nunc faucibus a pellentesque. Posuere sollicitudin aliquam ultrices sagittis orci. Nunc sed augue lacus viverra. Quam nulla porttitor massa id neque aliquam vestibulum morbi blandit.</p>
 
             <p>Sapien eget mi proin sed libero enim sed. Auctor elit sed vulputate mi. Id diam maecenas ultricies mi eget mauris pharetra. Aliquam purus sit amet luctus venenatis lectus. Dictum at tempor commodo ullamcorper a lacus vestibulum sed. Non consectetur a erat nam. Sed turpis tincidunt id aliquet risus feugiat in ante. Ut tellus elementum sagittis vitae et leo duis ut diam. Vel facilisis volutpat est velit egestas dui id. Blandit turpis cursus in hac.</p>
-            Ota yhteyttä pankki@pankki.com</section>
+            Ota yhteyttä pankki@pankki.com
+            </section></section>
     );
 }
 

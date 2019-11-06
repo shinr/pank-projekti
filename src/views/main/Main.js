@@ -1,11 +1,18 @@
 import React from 'react';
 import EventCalendar from '../../ui/events';
 
+import styles from "../views.module.css"
+
 export function Main() {
     return (
-        <section>
-            <EventCalendar />
-            Tervetuloa PANK ryn uudistetuille kotisivuille!</section>
+        <section className={styles.general_row}>
+                <section className={styles.general_column}>
+                Tervetuloa PANK ryn uudistetuille kotisivuille!
+                </section>
+                <section className={styles.general_column_30}>
+                <EventCalendar />
+                </section>
+            </section>
     );
 }
 

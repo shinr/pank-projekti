@@ -26,7 +26,6 @@
 
 .App-main {
   flex-grow:1;
-  background-color:lightgrey;
   margin: 150px 125px 25px;
   max-width:1400px;
   width:100%;
