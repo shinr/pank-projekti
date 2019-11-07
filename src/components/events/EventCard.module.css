@@ -1,0 +1,33 @@
+.even {
+    background: white;
+}
+
+.odd {
+    background: #ededed;
+}
+
+.eventcard label {
+    display:flex;
+    color: #333333;
+    padding: 7px 15px;
+    align-items: center;
+    border: 0px solid lightgrey;
+    border-width: 0px 4px 0px 4px;
+}
+
+.eventcard label:hover {
+    background:lightgrey;
+    border: 0px solid grey;
+    border-width: 0px 4px 0px 4px;
+}
+
+.eventcard label span {
+    margin: 0px 7px;
+}
+
+.eventcard__expanded {
+    padding: 7px 15px;
+    background:lightgrey;
+    border: 1px solid lightgrey;
+    border-bottom: 4px solid grey;
+}

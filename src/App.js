@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter, Route, Link, Switch } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCheckSquare, faBars, faCaretDown, faCaretRight, faUser, faDownload } from '@fortawesome/free-solid-svg-icons'
+import { faCheckSquare, faBars, faCaretDown, faCaretRight, faUser, faDownload, faCalendar, faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 
 import { AppStateProvider, initialAppState } from "./state/state"
 import NavBar from './ui/navbar'
@@ -16,7 +16,7 @@ import { appReducer } from './state/reducers';
 
 function App() {
   // add fontawesome icons into the library, are used with FontAwesomeIcon icon="" -component
-  library.add(faCheckSquare, faBars, faCaretDown, faCaretRight, faUser, faDownload)
+  library.add(faCheckSquare, faBars, faCaretDown, faCaretRight, faUser, faDownload, faCalendar, faCalendarAlt)
   return (
     <AppStateProvider initialState={initialAppState} reducer={appReducer}>
       <HashRouter>

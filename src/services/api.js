@@ -72,6 +72,8 @@ const postHelper = async (apiName, body, additionalParameters = {}, options = {}
     }
 }
 
+const BAD_FETCH = "bad"
+const returnArrayWhenNotBad = (entities) => first(entities).hasOwnProperty(BAD_FETCH) ? first(entities) : entities
 // exposed helper functions, just make more
 
 export const getNews = async () => {
@@ -101,7 +103,7 @@ export const getEvents = async () => {
     const events = await getHelper(apiHierarchy.events)
     // TODO also fetch user info
     //const userData = await getUserInfo()
-    return events
+    return returnArrayWhenNotBad(events)
 }
 
 export const getDocument = async (id, fileName) => {
@@ -115,5 +117,5 @@ export const getDocument = async (id, fileName) => {
 
 export const getDocuments = async () => {
     const documents = await getHelper(apiHierarchy.documents)
-    return first(documents).hasOwnProperty("bad") ? first(documents) : documents
+    return returnArrayWhenNotBad(documents)
 }

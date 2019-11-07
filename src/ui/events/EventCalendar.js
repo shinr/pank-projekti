@@ -14,9 +14,16 @@ export const EventCalendar = () => {
         }
         getData()
     })
-    return <div>{ events.map((e) => <EventCard 
-                                        headline={e.headline} 
-                                        content={e.content} />)}</div>
+    const _e = events.bad
+        ? <div>Tietokannan yhteysvirhe tapahtumia haettaessa</div>
+        : events.map((e, index) => <EventCard
+            key={`event-card-${index}`}
+            index={index}
+            date={e.event_date}
+            headline={e.headline}
+            content={e.content} />)
+    return <div><h2>Tapahtumat</h2>
+    { _e || 'Ei tapahtumia' }</div>
 }
 
 export default EventCalendar
