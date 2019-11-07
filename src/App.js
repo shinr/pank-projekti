@@ -8,7 +8,7 @@ import NavBar from './ui/navbar'
 import Footer from "./ui/footer"
 import News from './views/news'
 import Main from './views/main'
-import Contact from './views/contact'
+import Organization from './views/organization'
 import Documents from './views/documents'
 
 import './App.css';
@@ -25,15 +25,16 @@ function App() {
             <NavBar>
               <Link to="/">Koti</Link>
               <Link to="/news">Uutiset</Link>
-              <Link to="/contact">Ota yhteyttä</Link>
+              <Link to="/pank">Organisaatio</Link>
               <Link to="/documents">Tietopankki</Link>
             </NavBar>
           </header>
           <main className="App-main">
             <Switch>
               <Route path='/news' component={News} />
-              <Route path='/contact' component={Contact} />
+              <Route path='/pank' component={Organization} />
               <Route path='/documents' component={Documents} />
+              <Route path='/documents/:tag' component={Documents} />
               <Route path='/' component={Main} />
             </Switch>
           </main>
