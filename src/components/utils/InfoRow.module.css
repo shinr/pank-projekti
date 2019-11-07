@@ -1,0 +1,10 @@
+.inforow {
+    display: flex;
+    flex-direction: row;
+}
+
+.textfield {
+    font-size:18px;
+    font-weight:300;
+    flex: 1;
+}

@@ -7,7 +7,7 @@ export function Main() {
     return (
         <section className={styles.general_row}>
                 <section className={styles.general_column}>
-                Tervetuloa PANK ryn uudistetuille kotisivuille!
+                <h1>Tervetuloa PANK ryn uudistetuille kotisivuille!</h1>
                 </section>
                 <section className={styles.general_column_30}>
                 <EventCalendar />

@@ -35,6 +35,39 @@
   justify-content: center;
 }
 
+.App-main h1 {
+  font-size:28px;
+  font-weight:400;
+  text-transform: uppercase;
+  width:100%;
+  border-bottom: 1px solid lightgrey;
+  padding: 15px 0px;
+}
+
+.App-main h2 {
+  font-size:24px;
+  font-weight:400;
+  text-transform: uppercase;
+  width:100%;
+  
+  border-bottom: 1px solid lightgrey;
+  padding: 15px 0px;
+}
+
+.App-main h3 {
+  font-weight:300;
+  font-size:18px;
+  text-transform: uppercase;
+  width:100%;
+  
+  border-bottom: 1px solid lightgrey;
+  padding: 15px 0px;
+}
+
+.App-main p, span {
+  line-height:2em;
+}
+
 .App-footer {
   background-color:#61dafb;
   flex-shrink:0;
