@@ -17,7 +17,11 @@ insert into api.tags (name) values ('Konferenssijulkaisu');
 
 -- UUTISET
 insert into api.news (headline, posted_by, content) values
-  ('Lisää tiedotteita', 1, 'Nyt on hieno hiihtoreissu tulossa. Mikäli asfaltti kestää, mennään hiihtämään hiihtobussilla hiihtokeskukseen. Jos asfaltin päällysteissä on puutteita, joudutaan ne korjaamaan matkan varrella. Siksi menemme asfalttityökoneella.'), ('Teiden suolaus aiheuttaa muutoksia', 1, 'Teitä suolataan.  Harmillisesti se tapahtui liian suolaisesti. Nyt siis teitä on suolattu liikaa joten lisätään vettä asfaltille.');
+  ('Lisää tiedotteita', 1, 'Nyt on hieno hiihtoreissu tulossa. Mikäli asfaltti kestää, mennään hiihtämään hiihtobussilla hiihtokeskukseen. Jos asfaltin päällysteissä on puutteita, joudutaan ne korjaamaan matkan varrella. Siksi menemme asfalttityökoneella.');
+insert into api.news (headline, posted_by, content) values  
+  ('Teiden suolaus aiheuttaa muutoksia', 1, 'Teitä suolataan.  Harmillisesti se tapahtui liian suolaisesti. Nyt siis teitä on suolattu liikaa joten lisätään vettä asfaltille.');
+insert into api.news (headline, posted_by, content) values  
+  ('Asfalttikonferenssi lähestyy', 1, E'Asfalttikonferenssi järjestetään jälleen Oulussa. Tähän hienoon tapahtumaan olemme saaneet tilat Oulun Yliopistolta, joten kokoonnumme Saalastinsalissa tällä kertaa!\nTilaisuutta varten etsitään edelleen puhujia. Mikäli sinulla on jotain uutta ja hienoa, tai miksipä ei vanhaa ja viisasta, jonka haluat jakaa kansainväliselle yleisöllemme, ole yhteydessä konferenssitoimikuntaan! Takaraja esitysten lähettämiselle on ensi kuun viidestoista. Sen jälkeen tulleet esitykset menevät suoraan käsittelemättömien pinon pohjalle.\nNähdään siellä!');
 
 
 -- TAPAHTUMAT
