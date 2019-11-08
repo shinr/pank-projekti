@@ -6,28 +6,76 @@
     background: #ededed;
 }
 
-.eventcard label {
-    display:flex;
-    color: #333333;
-    padding: 7px 15px;
+.eventcard__content {
+    display:flex;   
+    flex-direction: row;
+    color:#454545;
+    padding: 15px 0px;
     align-items: center;
     border: 0px solid lightgrey;
     border-width: 0px 4px 0px 4px;
 }
 
-.eventcard label:hover {
+.eventcard__content:hover {
+    cursor: pointer;
     background:lightgrey;
     border: 0px solid grey;
     border-width: 0px 4px 0px 4px;
 }
 
-.eventcard label span {
+.eventcard__content span {
     margin: 0px 7px;
+}
+
+.eventcard__icon {
+    padding:0px 15px;
+}
+
+.eventcard__date {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-transform:lowercase;
+    padding: 0px 7px;
+}
+
+.eventcard__date span:nth-child(1) {
+    font-size:24px;
+    line-height:1em;
+    font-weight:bolder;
+    
+}
+
+.eventcard__date span:nth-child(2) {
+    font-size:12px;
+}
+
+.eventcard__title {
+    flex:1;
+}
+
+.eventcard__title div:first-child {
+    text-transform: uppercase;
+    font-weight: lighter;
+}
+
+.eventcard__title div:last-child {
+    font-size:.8em;
+    text-transform: uppercase;
+    font-weight: lighter;
 }
 
 .eventcard__expanded {
     padding: 7px 15px;
     background:lightgrey;
+    line-height:2em;
     border: 1px solid lightgrey;
     border-bottom: 4px solid grey;
+}
+
+.eventcard__expanded span {
+    font-size:12px;
+    display:block;
+    text-transform: uppercase;
+    font-weight:lighter;
 }
