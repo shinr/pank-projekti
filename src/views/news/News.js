@@ -24,45 +24,20 @@ export const News = () => {
                     <NewsList news={news} />
                 </section>
                 <section className={styles.general_column_30}>
-                    <NewsList news={news} />
+                    Sivujuttu
                 </section>
             </section>
             <section className={styles.general_column}>
                 <section className={styles.general_row}>
-                    <NewsList news={news} />
+                    Rivi 1
                 </section>
                 <section className={styles.general_row}>
-                    <NewsList news={news} />
+                Rivi 2
                 </section>
                 <section className={styles.general_row}>
-                    <NewsList news={news} />
+                Rivi 3
                 </section>
             </section>
-            <section className={styles.general_row}>
-                <section className={styles.general_column}>
-                    <NewsList news={news} />
-                </section>
-                <section className={styles.general_column}>
-                    <NewsList news={news} />
-                </section>
-            </section>
-            <section className={styles.general_row}>
-                <section className={styles.general_column}>
-                    <NewsList news={news} />
-                </section>
-                <section className={styles.general_column_60}>
-                    <NewsList news={news} />
-                </section>
-            </section>
-            <section className={styles.general_row}>
-                <section className={styles.general_column_30}>
-                    <NewsList news={news} />
-                </section>
-                <section className={styles.general_column}>
-                    <NewsList news={news} />
-                </section>
-            </section>
-
         </>
     );
 }

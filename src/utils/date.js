@@ -14,6 +14,11 @@ export const timestampToObject = timestamp => {
     }
 }
 
+export const newsTimestamp = timestamp => {
+    const date = new Date(Date.parse(timestamp))
+    return eventTimestamp(date)
+}
+
 export const shortEventTimestamp = (timestamp) => {
     const formatted = `${timestamp.getDate()}. `
         + `${monthToString[timestamp.getMonth()]}ta `

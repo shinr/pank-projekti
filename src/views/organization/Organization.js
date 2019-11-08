@@ -10,6 +10,7 @@ import styles from "../views.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export function Organization() {
+    // initialTab corresponds to id, doesn't have to be number
     return (
         <section className={styles.general_row}>
             <section className={styles.general_column}>

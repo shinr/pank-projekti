@@ -23,7 +23,7 @@ export const EventCalendar = () => {
             headline={e.headline}
             content={e.content} />)
     return <div><h2>Tapahtumat</h2>
-    { _e || 'Ei tapahtumia' }</div>
+        {_e || 'Ei tapahtumia'}</div>
 }
 
 export default EventCalendar

@@ -9,7 +9,6 @@ import styles from "../views.module.css"
 import { useAppStateValue } from '../../state/state';
 
 export const Documents = (props) => {
-    console.log("D", props)
     const [documents, setDocuments] = useState([]);
     const [{ tags }, dispatch] = useAppStateValue();
     useEffect(() => {
