@@ -32,9 +32,10 @@ function App() {
           <main className="App-main">
             <Switch>
               <Route path='/news' component={News} />
-              <Route path='/pank' component={Organization} />
-              <Route path='/documents' component={Documents} />
-              <Route path='/documents/:tag' component={Documents} />
+              <Route path='/pank' exact component={Organization} />
+              <Route path='/pank/:tab/' component={Organization} />
+              <Route path='/documents' exact component={Documents} />
+              <Route path='/documents/:tag/' component={Documents} />
               <Route path='/' component={Main} />
             </Switch>
           </main>

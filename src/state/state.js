@@ -1,7 +1,12 @@
 import React, { useReducer, useContext, createContext } from "react"
 
+// TODO: HARDCODING ONLY FOR TESTING remove later
+// maybe use in a skeleton sense to hide loading? shouldn't be needed tho as app state is loaded during initial load
 export const initialAppState = {
-    tags: [{id: 1, name: "Pöytäkirjat"}, {id: 2, name: "Seminaaripaperit"}, {id: 3, name: "Tieteelliset julkaisut"}]
+    tags: [{id: 1, name: "Pöytäkirjat"}, {id: 2, name: "Seminaaripaperit"}, {id: 3, name: "Tieteelliset julkaisut"}],
+    externalLinks: [{id: 1, title: "Autori", url: "http://www.autori.fi"}, {id: 2, title: "INFRA ry", url: "http://www.infrary.fi"}],
+    memberOrganizations: [{id: 1, name: "Oulun Yliopisto", url: "http://www.oulu.fi/yliopisto"}],
+    pankInformation: []
 }
 
 export const UserStateContext = createContext();
