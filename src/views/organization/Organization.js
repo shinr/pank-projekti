@@ -8,14 +8,17 @@ import { InfoRow } from "../../components/utils/InfoRow"
 
 import styles from "../views.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { LinkList } from '../../ui/lists/LinkList';
+import { MemberList } from "../../ui/lists/MemberList"
 
-export function Organization() {
+export function Organization({match}) {
+    const { tab } = match.params
     // initialTab corresponds to id, doesn't have to be number
     return (
         <section className={styles.general_row}>
             <section className={styles.general_column}>
-                <Tabs initialTab={1}>
-                    <Tab id={1} icon={<FontAwesomeIcon icon="download" />} title="Organisaatio">
+                <Tabs currentTab={tab || "pank"}>
+                    <Tab id={"pank"} icon={<FontAwesomeIcon icon="download" />} title="Organisaatio">
                         <h1>Organisaatio</h1>
                         <h2>PANK ry - PÄÄLLYSTEALAN NEUVOTTELUKUNTA</h2>
                         <h3>Käynti- ja postitusosoite</h3>
@@ -31,11 +34,11 @@ export function Organization() {
                         <InfoRow infos={{ title: "IBAN", iban: "FI" }} />
                         <InfoRow infos={{ title: "IBAN", iban: "FI" }} />
                     </Tab>
-                    <Tab id={2} icon={<FontAwesomeIcon icon="download" />} title="Jäsenyritykset">
-                        <p>Tulen joskus listaamaan Jäsenyritykset</p>
+                    <Tab id={"members"} icon={<FontAwesomeIcon icon="download" />} title="Jäsenyritykset">
+                        <MemberList />
                     </Tab>
-                    <Tab id={3} icon={<FontAwesomeIcon icon="download" />} title="Linkkejä alan järjestöihin">
-                        <p>Tulen joskus olemaan linkkisivu</p>
+                    <Tab id={"links"} icon={<FontAwesomeIcon icon="download" />} title="Linkkejä alan järjestöihin">
+                        <LinkList />
                     </Tab>
                 </Tabs>
             </section>

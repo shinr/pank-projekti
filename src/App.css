@@ -21,7 +21,7 @@
 }
 
 .App-main a {
-  color: #61dafb;
+  text-decoration: none;
 }
 
 .App-main {
@@ -50,7 +50,7 @@
   text-transform: uppercase;
   width:100%;
   
-  border-bottom: 1px solid lightgrey;
+  
   padding: 15px 0px;
 }
 
@@ -60,7 +60,7 @@
   text-transform: uppercase;
   width:100%;
   
-  border-bottom: 1px solid lightgrey;
+  
   padding: 15px 0px;
 }
 

@@ -13,17 +13,20 @@
     padding:16px 32px;
     background:white;
     border:0;
+    color: #6f6f6f;
     border-bottom: 4px solid #dfdfdf;
 }
 
 .tabs_tab:hover {
     background:lightgrey;
     cursor: pointer;
-    border-bottom: 4px solid #bfbfbf;
+    color: #4f4f4f;
+    border-bottom: 4px solid #afafaf;
 }
 
 .tabs_tab__activated {
     composes: tabs_tab;
+    color: #2f2f2f;
     background: white;
     border-bottom: 4px solid #7f7f7f;
 }
