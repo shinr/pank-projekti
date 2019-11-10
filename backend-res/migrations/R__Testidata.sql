@@ -10,6 +10,9 @@ begin
   perform lo_unlink(l_oid);
 end;$$;
 
+-- PAGES
+insert into api.pages (name, data) values ('strategy-and-mission', '')
+
 -- TAGIT
 insert into api.tags (name) values ('Pöytäkirja');
 insert into api.tags (name) values ('Seminaaripaperi');
