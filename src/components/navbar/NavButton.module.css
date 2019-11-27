@@ -1,17 +1,19 @@
 .navbutton {
     background-color:white;
-    padding:15px;
-    border-style: solid; 
+    height: 100%;
+    border-style: solid;
     border-color: #cccccc;
-    border-width: 0px 0px 0px 1px;
-}
-
-.navbutton:last-of-type {
+    width: 150px;
+    margin-left: -1px;
     border-width: 0px 1px 0px 1px;
+    display: flex;
 }
 
 .navbutton a {
+    text-align: center;
     color: #767676;
+    padding:15px;
+    width: 130px;
     text-decoration: none;
     font-size: 18px;
     text-transform: uppercase;
@@ -19,4 +21,11 @@
 
 .navbutton:hover {
     background-color:lightgrey;
+}
+
+@media only screen and (max-width: 970px) {
+  .navbutton {
+    display: inline-flex;
+    border-width: 0px 1px 1px 1px;
+  }
 }

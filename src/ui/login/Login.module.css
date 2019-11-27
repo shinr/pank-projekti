@@ -1,17 +1,51 @@
 .login_button {
-
-    background-color:white;
-    text-transform: uppercase;
-    color: #767676;
-    text-decoration: none;
-    font-size: 18px;
-    text-transform: uppercase;
-    margin: auto 0px auto auto;
+  text-transform: uppercase;
+  color: #767676;
+  text-decoration: none;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin: auto 0px auto auto;
+  height: 54px;
+  width: 172px;
+  display: inherit;
 }
 
 .login_form {
-    position: absolute;
-    background-color:white;
-    right:0px;
-    top:64px;
+  position: absolute;
+  background-color:white;
+  right:0px;
+  top:55px;
+  border-style: solid;
+  border-color: #cccccc;
+  border-width: 1px 1px 1px 1px;
+  box-shadow: 0px 0px 10px 1px #666666;
+}
+
+.login_form input {
+  width: auto;
+  padding: 8px 8px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.login_form label {
+  color: #767676;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 0px 10px auto 10px;
+}
+
+.login_button a {
+  width: 172px;
+}
+
+@media only screen and (max-width: 970px) {
+  .login_button {
+    height: 100%;
+    width: 150px;
+    border-width: 0px 1px 1px 0px;
+    display: inline-flex;
+    margin: 0px 0px 0px 0px;
+  }
 }

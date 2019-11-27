@@ -1,17 +1,26 @@
 .navbar {
-    width:100%;
-    background-color: white;
-    justify-content: center;
-    display:flex;
-    flex-direction: row;
-    color: black;
-    box-shadow: 0px 0px 5px 5px #666666;
+  width:100%;
+  height: auto;
+  background-color: white;
+  justify-content: center;
+  display:flex;
+  flex-direction: row;
+  color: black;
+  box-shadow: 0px 0px 10px 1px #666666;
 }
 
 .pank_logo {
-    margin-right:auto;
-    font-size:32px;
-    margin-top:auto;
-    margin-bottom:auto;
-    margin-left:15px;
+  margin-right: auto;
+  object-fit: contain;
+  width: 172px;
+  padding-left: 0px;
+}
+
+@media only screen and (max-width: 970px) {
+  .pank_logo {
+    display: none;
+  }
+  .navbar {
+    display: inline-block;
+  }
 }

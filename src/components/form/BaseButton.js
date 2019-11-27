@@ -7,7 +7,7 @@ export const BaseButton = ({ onClick }) => {
         <input
             className={styles.basebutton}
             type="button"
-            value="click"
+            value="Kirjaudu"
             onClick={onClick} />)
 }
 

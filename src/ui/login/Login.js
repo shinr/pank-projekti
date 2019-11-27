@@ -15,9 +15,9 @@ export const Login = (props) => {
     return (<>
         <NavButton classes={[styles.login_button]}>
             <div
-            className={styles.login_button} 
+            className={styles.login_button}
             onClick={() => openLoginForm(!loginFormOpen)}>
-                <FontAwesomeIcon icon="user" /> Kirjaudu
+                <a><FontAwesomeIcon icon="user" /> Kirjaudu</a>
             </div>
         </NavButton>
         {loginFormOpen &&
@@ -25,8 +25,10 @@ export const Login = (props) => {
                 {token
                     ? <div>Kirjauduttu {user}</div>
                     : <div>
+                      <label>Käyttäjä: </label>
                         <TextInputField
                             change={(e) => setLogin({ ...loginInfo, email: e.target.value })} />
+                      <label>Salasana: </label>
                         <TextInputField
                             change={(e) => setLogin({ ...loginInfo, password: e.target.value })} password={true} />
                         <LoginButton
