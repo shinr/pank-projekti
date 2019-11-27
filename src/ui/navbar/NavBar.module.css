@@ -21,6 +21,8 @@
     display: none;
   }
   .navbar {
-    display: inline-block;
+    display: flex-root;
+    justify-content: center;
+    position: static;
   }
 }

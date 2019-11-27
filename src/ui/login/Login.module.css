@@ -23,11 +23,17 @@
 
 .login_form input {
   width: auto;
-  padding: 8px 8px;
   margin: 8px 0;
+  border-radius: 5px;
   display: inline-block;
   border: 1px solid #ccc;
-  box-sizing: border-box;
+  color: #767676;
+  height: 30px;
+  background-color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
 }
 .login_form label {
   color: #767676;
@@ -36,16 +42,37 @@
   margin: 0px 10px auto 10px;
 }
 
-.login_button a {
-  width: 172px;
-}
 
 @media only screen and (max-width: 970px) {
   .login_button {
     height: 100%;
-    width: 150px;
     border-width: 0px 1px 1px 0px;
     display: inline-flex;
-    margin: 0px 0px 0px 0px;
+  }
+  .login_form {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    width: 100%;
+  }
+  .login_button a svg {
+      display: none;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .login_form label, .login_form input {
+    margin: 0 auto;
+    display: table;
+  }
+  .login_form {
+    top: 21%;
+    filter: drop-shadow(0px 0px 100px #666666);
+    padding: 2%;
+    width: auto;
+    border-radius: 5px;
+    right: auto;
+    left: auto;
+    box-shadow: 0px 0px 10px 1px #666666;
   }
 }
