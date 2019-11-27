@@ -27,5 +27,16 @@
   .navbutton {
     display: inline-flex;
     border-width: 0px 1px 1px 1px;
+    width: 20%;
   }
+  .navbutton a {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .navbutton {
+      display: inline-flex;
+      border-width: 0px 1px 1px 1px;
+    }
 }
