@@ -13,12 +13,16 @@ export const userReducer = (state, action) => {
 }
 
 export const appReducer = (state, action) => {
-    const { SAVE_TAGS } = actions
+    const { SAVE_TAGS, SAVE_PAGES } = actions
     const { type, payload } = action
+    console.log(payload)
     switch(type) {
         case SAVE_TAGS:
             const { tags } = payload;
-            return state.tags = tags 
+            return { ...state, tags: tags } 
+        case SAVE_PAGES:
+            const { pages } = payload
+            return { ...state, pages: pages }
         default:
             return state
     }

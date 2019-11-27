@@ -7,9 +7,9 @@ const methodsSectionId = "methods-section"
 const templateTitle = "template-title"
 const templateSubtitle = "template-subtitle"
 const templateParagraph = "template-paragraph"
-const templateBulletList = "template-bullet-list"
+const templateBulletList = "template-bulletlist"
 const templateTable = "template-table"
-const templatePlainList = "template-plain-list"
+const templatePlainList = "template-plainlist"
 
 export const strategy = {
     mission: missionSectionId,
