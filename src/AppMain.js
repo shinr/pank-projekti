@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { useAppStateValue } from "./state/state"
 
@@ -21,7 +22,7 @@ export const AppMain = () => {
     useEffect(() => {
         const getData = async () => {
             const data = await getPages()
-            when(pages.length !== data.length, 
+            when(pages.length !== data.length,
                 () => dispatch(payloadAction(actions.SAVE_PAGES, { pages: data })))
         }
         getData()
@@ -29,10 +30,10 @@ export const AppMain = () => {
     return (<div className="App">
         <header className="App-header">
             <NavBar>
-                <Link to="/">Koti</Link>
-                <Link to="/news">Uutiset</Link>
-                <Link to="/pank">Organisaatio</Link>
-                <Link to="/documents">Tietopankki</Link>
+                <Link to="/"><FontAwesomeIcon icon="home"/>Koti</Link>
+                <Link to="/news"><FontAwesomeIcon icon="newspaper"/>Uutiset</Link>
+                <Link to="/pank"><FontAwesomeIcon icon="book"/>Organisaatio</Link>
+                <Link to="/documents"><FontAwesomeIcon icon="server"/>Tietopankki</Link>
             </NavBar>
         </header>
         <main className="App-main">
