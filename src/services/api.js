@@ -8,6 +8,7 @@ export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
 // the api routes - correspond to api/<string> or api/<identifier>/<endPoint> for accessing stored procedures
 const apiHierarchy = {
+    pages: "pages",
     news: "news",
     login: { endPoint: "login", identifier: "rpc" },
     events: "events",
@@ -118,4 +119,17 @@ export const getDocument = async (id, fileName) => {
 export const getDocuments = async () => {
     const documents = await getHelper(apiHierarchy.documents)
     return returnArrayWhenNotBad(documents)
+}
+
+export const getPage = async (name) => {
+    const urlParameters = { name: { is: name }}
+    const page = await getHelper(apiHierarchy.pages, urlParameters)
+    return returnArrayWhenNotBad(page)
+}
+
+export const getPages = async () => {
+    const pages = await getHelper(apiHierarchy.pages)
+    const updated = pages.reduce((acc, p) => {
+            return Object.assign(acc, { [p.name]: p.data })}, {})
+    return updated
 }
