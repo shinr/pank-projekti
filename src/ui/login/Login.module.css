@@ -7,6 +7,7 @@
   margin: auto 0px auto auto;
   height: 54px;
   width: 172px;
+  justify-content: center;
   display: inherit;
 }
 
@@ -48,15 +49,13 @@
     height: 100%;
     border-width: 0px 1px 1px 0px;
     display: inline-flex;
+    margin: 0px;
+    width: 20%
   }
   .login_form {
     display: flex;
     position: absolute;
     justify-content: center;
-    width: 100%;
-  }
-  .login_button a svg {
-      display: none;
   }
 }
 
