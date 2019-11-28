@@ -1,3 +1,3 @@
-import { Paragraph, Title, Subtitle, BulletList, Section } from "./Templater"
+import { Paragraph, Title, Subtitle, BulletList, Section, Table, CustomTemplate } from "./Templater"
 
-export { Paragraph, Title, Subtitle, BulletList, Section }
+export { Paragraph, Title, Subtitle, BulletList, Section, Table, CustomTemplate }

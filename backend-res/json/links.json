@@ -1,0 +1,43 @@
+[
+    {
+        "template_section": {
+            "children": [
+                {
+                    "template_title": {
+                        "props": {
+                            "content": "Linkkejä alan järjestöihin"
+                        }
+                    }
+                }, {
+                    "template_link": {
+                        "props": {
+                            "url": "http://www.eurobitume.eu",
+                            "label": "Eurobitume, the European Bitumen Association"
+                        }
+                    }
+                }, {
+                    "template_link": {
+                        "props": {
+                            "url": "http://www.infrary.fi",
+                            "label": "INFRA ry"
+                        }
+                    }
+                }, {
+                    "template_link": {
+                        "props": {
+                            "url": "http://www.eapa.org",
+                            "label": "European Asphalt Pavement Association"
+                        }
+                    }
+                }, {
+                    "template_link": {
+                        "props": {
+                            "url": "http://www.ptl.fi",
+                            "label": "Pohjoismaiden tie- ja liikennefoorumi"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+]

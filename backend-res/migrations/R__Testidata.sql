@@ -58,6 +58,96 @@ insert into api.documents (headline, description, posted_by, filedata, filename,
 
 
 -- PAGES
+insert into api.pages (name, data) values ('members', '[
+    {
+        "template_section": {
+            "children": [
+                {
+                    "template_title": {
+                        "props": {
+                            "content": "Jäsenyritykset"
+                        }
+                    }
+                },
+                {
+                    "template_member": {
+                        "props": {
+                            "url": "http://www.oulu.fi/yliopisto",
+                            "name": "Oulun yliopisto"
+                        }
+                    }
+                },
+                {
+                    "template_member": {
+                        "props": {
+                            "url": "http://www.aalto.fi",
+                            "name": "Aalto-yliopisto"
+                        }
+                    }
+                },
+                {
+                    "template_member": {
+                        "props": {
+                            "url": "http://www.infrary.fi",
+                            "name": "INFRA ry"
+                        }
+                    }
+                },
+                {
+                    "template_member": {
+                        "props": {
+                            "url": "http://www.finavia.fi",
+                            "name": "Finavia Oy"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+]');
+insert into api.pages (name, data) values ('links', '[
+    {
+        "template_section": {
+            "children": [
+                {
+                    "template_title": {
+                        "props": {
+                            "content": "Linkkejä alan järjestöihin"
+                        }
+                    }
+                }, {
+                    "template_link": {
+                        "props": {
+                            "url": "http://www.eurobitume.eu",
+                            "label": "Eurobitume, the European Bitumen Association"
+                        }
+                    }
+                }, {
+                    "template_link": {
+                        "props": {
+                            "url": "http://www.infrary.fi",
+                            "label": "INFRA ry"
+                        }
+                    }
+                }, {
+                    "template_link": {
+                        "props": {
+                            "url": "http://www.eapa.org",
+                            "label": "European Asphalt Pavement Association"
+                        }
+                    }
+                }, {
+                    "template_link": {
+                        "props": {
+                            "url": "http://www.ptl.fi",
+                            "label": "Pohjoismaiden tie- ja liikennefoorumi"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+]');
 insert into api.pages (name, data) values ('strategy_and_mission', '[
     {
         "template_section": {
@@ -275,153 +365,89 @@ insert into api.pages (name, data) values ('strategy_and_mission', '[
                             "rows": [
                                 [
                                     {
-                                        "template_paragraph": {
-                                            "props": {
-                                                "content": "Imago"
-                                            }
-                                        }
+                                        "content": "Imago"
                                     },
                                     {
-                                        "template_paragraph": {
-                                            "props": {
-                                                "content": "Päällysteala on houkutteleva ja arvostettu ala"
-                                            }
-                                        }
+                                        "content": "Päällysteala on houkutteleva ja arvostettu ala"
                                     },
                                     {
-                                        "template_bulletlist": {
-                                            "props": {
-                                                "content": [
-                                                    "Kehitetään alan koulutusjärjestelmiä alalla toimivien tarpeista lähtien",
-                                                    "luodaan toimintatavat, joilla mahdollistetaan alalla olevien suunnitelmallinen urakehitys",
-                                                    "kehitetään toimenpiteitä, joilla vaikutetaan positiivisesti työntekijöiden työympäristön terveyteen ja turvallisuuteen sekä kausiluontoisuuteen"
-                                                ]
-                                            }
-                                        }
+                                        "content": [
+                                            "Kehitetään alan koulutusjärjestelmiä alalla toimivien tarpeista lähtien",
+                                            "luodaan toimintatavat, joilla mahdollistetaan alalla olevien suunnitelmallinen urakehitys",
+                                            "kehitetään toimenpiteitä, joilla vaikutetaan positiivisesti työntekijöiden työympäristön terveyteen ja turvallisuuteen sekä kausiluontoisuuteen"
+                                        ]
                                     },
                                     {
-                                        "template_plainlist": {
-                                            "props": {
-                                                "content": [
-                                                    "PANK",
-                                                    "Jäsenet"
-                                                ]
-                                            }
-                                        }
+                                        "content": [
+                                            "PANK",
+                                            "Jäsenet"
+                                        ]
                                     }
                                 ],
                                 [
                                     {
-                                        "template_paragraph": {
-                                            "props": {
-                                                "content": "Kestävä kehitys"
-                                            }
-                                        }
+                                        "content": "Kestävä kehitys"
                                     },
                                     {
-                                        "template_paragraph": {
-                                            "props": {
-                                                "content": "Päällyste on arvostettu ja ympäristömyönteinen tuote"
-                                            }
-                                        }
+                                        "content": "Päällyste on arvostettu ja ympäristömyönteinen tuote"
                                     },
                                     {
-                                        "template_bulletlist": {
-                                            "props": {
-                                                "content": [
-                                                    "Kehitetään uusia tuotteita ja sovelluksia asiakkaiden muuttuviin tarpeisiin",
-                                                    "Kehitetään päällysteiden uusiokäyttöä",
-                                                    "kehitetään teollisuuden sivutuotteiden hyötykäyttöä päällysteissä",
-                                                    "kehitetään energiaa ja ympäristöä säästäviä tuotantoprosesseja",
-                                                    "tuotetaan alalta ympäristöön liittyvää taustamateriaalia ympäristöviranomaisia ja muita sidosryhmiä varten"
-                                                ]
-                                            }
-                                        }
+                                        "content": [
+                                            "Kehitetään uusia tuotteita ja sovelluksia asiakkaiden muuttuviin tarpeisiin",
+                                            "Kehitetään päällysteiden uusiokäyttöä",
+                                            "kehitetään teollisuuden sivutuotteiden hyötykäyttöä päällysteissä",
+                                            "kehitetään energiaa ja ympäristöä säästäviä tuotantoprosesseja",
+                                            "tuotetaan alalta ympäristöön liittyvää taustamateriaalia ympäristöviranomaisia ja muita sidosryhmiä varten"
+                                        ]
                                     },
                                     {
-                                        "template_plainlist": {
-                                            "props": {
-                                                "content": [
-                                                    "Urakoitsijat",
-                                                    "PANK"
-                                                ]
-                                            }
-                                        }
+                                        "content": [
+                                            "Urakoitsijat",
+                                            "PANK"
+                                        ]
                                     }
                                 ],
                                 [
                                     {
-                                        "template_paragraph": {
-                                            "props": {
-                                                "content": "Laatutaso"
-                                            }
-                                        }
+                                        "content": "Laatutaso"
                                     },
                                     {
-                                        "template_paragraph": {
-                                            "props": {
-                                                "content": "Suomalaiset päällysteet ovat kansainvälistä huippuluokka. Jokaiseen käyttötarkoitukseen on tarjolla soveltuvat laatutuotteet"
-                                            }
-                                        }
+                                        "content": "Suomalaiset päällysteet ovat kansainvälistä huippuluokka. Jokaiseen käyttötarkoitukseen on tarjolla soveltuvat laatutuotteet"
                                     },
                                     {
-                                        "template_bulletlist": {
-                                            "props": {
-                                                "content": [
-                                                    "panostetaan laatutietoiseen toimintaan sekä laadun ja palvelutason kehittämiseen",
-                                                    "ylläpidetään alan kansainvälistä yhteistyötä sekä harjoitetaan teknologian siirtoa Suomeen",
-                                                    "laaditaan ja käynnistetään alan T&K-ohjelma"
-                                                ]
-                                            }
-                                        }
+                                        "content": [
+                                            "panostetaan laatutietoiseen toimintaan sekä laadun ja palvelutason kehittämiseen",
+                                            "ylläpidetään alan kansainvälistä yhteistyötä sekä harjoitetaan teknologian siirtoa Suomeen",
+                                            "laaditaan ja käynnistetään alan T&K-ohjelma"
+                                        ]
                                     },
                                     {
-                                        "template_plainlist": {
-                                            "props": {
-                                                "content": [
-                                                    "Tilaajat",
-                                                    "PANK",
-                                                    "Urakoitsijat",
-                                                    "yhdessä rahoittajien kanssa"
-                                                ]
-                                            }
-                                        }
+                                        "content": [
+                                            "Tilaajat",
+                                            "PANK",
+                                            "Urakoitsijat",
+                                            "yhdessä rahoittajien kanssa"
+                                        ]
                                     }
                                 ],
                                 [
                                     {
-                                        "template_paragraph": {
-                                            "props": {
-                                                "content": "Prosessit"
-                                            }
-                                        }
+                                        "content": "Prosessit"
                                     },
                                     {
-                                        "template_paragraph": {
-                                            "props": {
-                                                "content": "Toiminta on yhteiskunnallisesti ja yritystaloudellisesti kannattavaa"
-                                            }
-                                        }
+                                        "content": "Toiminta on yhteiskunnallisesti ja yritystaloudellisesti kannattavaa"
                                     },
                                     {
-                                        "template_bulletlist": {
-                                            "props": {
-                                                "content": [
-                                                    "Kehitetään hankintamenettelyjä kokonaistaloudellisesti edullisimmalla ja kehitystoimintaan kannustavalla tavalla",
-                                                    "kehitetään yhteistyössä viranomaisten ja muiden osapuolten kanssa menettelytapoja, joilla eliminoidaan harmaan talouden toimijat markkinoilta"
-                                                ]
-                                            }
-                                        }
+                                        "content": [
+                                            "Kehitetään hankintamenettelyjä kokonaistaloudellisesti edullisimmalla ja kehitystoimintaan kannustavalla tavalla",
+                                            "kehitetään yhteistyössä viranomaisten ja muiden osapuolten kanssa menettelytapoja, joilla eliminoidaan harmaan talouden toimijat markkinoilta"
+                                        ]
                                     },
                                     {
-                                        "template_plainlist": {
-                                            "props": {
-                                                "content": [
-                                                    "Tilaajat",
-                                                    "Urakoitsija ja tilaajat"
-                                                ]
-                                            }
-                                        }
+                                        "content": [
+                                            "Tilaajat",
+                                            "Urakoitsija ja tilaajat"
+                                        ]
                                     }
                                 ]
                             ]

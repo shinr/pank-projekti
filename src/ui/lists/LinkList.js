@@ -1,13 +1,14 @@
 import React from "react"
+import Latoja from "latoja"
 
 import { useAppStateValue } from "../../state/state"
 
-import styles from "./LinkList.module.css"
-import LinkItem from "../../components/utils/LinkItem";
+import { CustomTemplate } from "../../components/templater"
 
 export const LinkList = () => {
-    const [{ externalLinks }, dispatch] = useAppStateValue()
-    return (<div className={styles.linklist}>
-    <h1>Linkkejä</h1>
-        {externalLinks.map(l => <LinkItem {...l} />)}</div>)
+    const [{ pages }, dispatch] = useAppStateValue()
+    const { links } = pages
+    return (<div>{links && <Latoja>
+            <CustomTemplate template={links} />
+        </Latoja>}</div>)
 }

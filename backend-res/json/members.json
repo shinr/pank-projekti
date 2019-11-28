@@ -1,0 +1,47 @@
+[
+    {
+        "template_section": {
+            "children": [
+                {
+                    "template_title": {
+                        "props": {
+                            "content": "Jäsenyritykset"
+                        }
+                    }
+                },
+                {
+                    "template_member": {
+                        "props": {
+                            "url": "http://www.oulu.fi/yliopisto",
+                            "name": "Oulun yliopisto"
+                        }
+                    }
+                },
+                {
+                    "template_member": {
+                        "props": {
+                            "url": "http://www.aalto.fi",
+                            "name": "Aalto-yliopisto"
+                        }
+                    }
+                },
+                {
+                    "template_member": {
+                        "props": {
+                            "url": "http://www.infrary.fi",
+                            "name": "INFRA ry"
+                        }
+                    }
+                },
+                {
+                    "template_member": {
+                        "props": {
+                            "url": "http://www.finavia.fi",
+                            "name": "Finavia Oy"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+]
