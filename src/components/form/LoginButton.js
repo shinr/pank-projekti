@@ -10,5 +10,5 @@ export const LoginButton = ({loginInfo}) => {
     const { email, password } = loginInfo;
     const [state, dispatch] = useUserStateValue()
     const loginFn = ({ user, role, token, bad }) => when(!bad, () => dispatch(payloadAction(actions.LOGIN, { user: user, role: role, token: token })))
-    return (<BaseButton onClick={async () => loginFn(await login(email, password))} />)
+    return (<BaseButton label="Kirjaudu" onClick={async () => loginFn(await login(email, password))} />)
 }

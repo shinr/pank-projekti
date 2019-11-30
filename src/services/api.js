@@ -1,5 +1,5 @@
 import { first } from "../utils/clojure"
-import { decodePayload } from "../utils/jwt"
+import { decodePayload, withToken } from "../utils/jwt"
 import { urlBuilder } from "../utils/url"
 import { isEmpty } from "../utils/general"
 import { saveAs } from "file-saver"
@@ -30,8 +30,8 @@ const apiCall = async (url, parameters, options) => {
     const { onError } = options
     const result = await fetch(url, parameters)
 
-    if (!result.ok) { 
-        return onError(result) 
+    if (!result.ok) {
+        return onError(result)
     }
 
     const data = await options.blob ? result.blob() : result.json()
@@ -54,18 +54,20 @@ const getHelper = async (apiName, urlParameters = {}, additionalParameters = {},
     }
 }
 
+const json = { "Content-Type": "application/json" }
+
 // POST
 const postHelper = async (apiName, body, additionalParameters = {}, options = {}) => {
     const { errorHandler, onError } = options
     const defaultParameters = {
         method: "POST",
         body: JSON.stringify(body),
-        headers: { "Content-Type": "application/json" }
+        headers: json
     }
     const parameters = Object.assign({}, defaultParameters, additionalParameters)
     const url = typeof apiName === "object" ? `${apiName.identifier}/${apiName.endPoint}` : apiName
     const mergedOptions = Object.assign({}, { onError: onError || defaultError }, options)
-    
+
     try {
         return await apiCall(`${BACKEND_URL}/${url}`, parameters, mergedOptions)
     } catch (error) {
@@ -88,7 +90,7 @@ export const login = async (email, password) => {
         pass: password
     }))
     const { token, bad } = loginData;
-    return bad ? loginData : { ...decodePayload(token), token:token }
+    return bad ? loginData : { ...decodePayload(token), token: token }
 }
 
 export const getUserInfo = async (id) => {
@@ -98,7 +100,7 @@ export const getUserInfo = async (id) => {
     return userData
 }
 
-export const getEvent = async (id) => {}
+export const getEvent = async (id) => { }
 
 export const getEvents = async () => {
     const events = await getHelper(apiHierarchy.events)
@@ -108,9 +110,11 @@ export const getEvents = async () => {
 }
 
 export const getDocument = async (id, fileName) => {
-    const urlParameters = 
-    { select: "filedata",
-    id: { is: id } }
+    const urlParameters =
+    {
+        select: "filedata",
+        id: { is: id }
+    }
     const headers = { "Accept": "application/octet-stream" }
     const blob = await getHelper(apiHierarchy.documents, urlParameters, { headers: headers }, { blob: true })
     saveAs(blob, fileName)
@@ -122,7 +126,7 @@ export const getDocuments = async () => {
 }
 
 export const getPage = async (name) => {
-    const urlParameters = { name: { is: name }}
+    const urlParameters = { name: { is: name } }
     const page = await getHelper(apiHierarchy.pages, urlParameters)
     return returnArrayWhenNotBad(page)
 }
@@ -130,6 +134,17 @@ export const getPage = async (name) => {
 export const getPages = async () => {
     const pages = await getHelper(apiHierarchy.pages)
     const updated = pages.reduce((acc, p) => {
-            return Object.assign(acc, { [p.name]: p.data })}, {})
+        return Object.assign(acc, { [p.name]: p.data })
+    }, {})
     return updated
+}
+
+export const postNews = async (article, token) => {
+    const news = await postHelper(apiHierarchy.news, article, { headers: { ...json, ...withToken(token) } })
+    return news
+}
+
+export const postEvents = async (event, token) => {
+    const events = await postHelper(apiHierarchy.events, event, { headers: { ...json, ...withToken(token) } })
+    return events
 }

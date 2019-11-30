@@ -1,7 +1,5 @@
 import React, { useReducer, useContext, createContext } from "react"
 
-import { strategyIds, strategy, template } from "../utils/constants"
-
 // TODO: HARDCODING ONLY FOR TESTING remove later
 // maybe use in a skeleton sense to hide loading? shouldn't be needed tho as app state is loaded during initial load
 // for pages like strategy and mission, the idea is that the data is retrieved from database and then formatted

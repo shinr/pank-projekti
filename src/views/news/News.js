@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
+import NewsForm from "../../ui/news/NewsForm"
 import NewsList from "../../components/news/NewsList"
 import { getNews } from '../../services/api';
 
 import { when } from "../../utils/clojure"
 
 import styles from "../views.module.css"
+import { useUserStateValue } from '../../state/state';
 
 export const News = () => {
     const [news, setNews] = useState([]);
+    const [{ role }, dispatch] = useUserStateValue();
     useEffect(() => {
         const getData = async () => {
             const data = await getNews()
@@ -18,27 +21,12 @@ export const News = () => {
         getData()
     })
     return (
-        <>
-            <section className={styles.general_row}>
-                <section className={styles.general_column}>
-                    <NewsList news={news} />
-                </section>
-                <section className={styles.general_column_30}>
-                    Sivujuttu
-                </section>
-            </section>
+        <section className={styles.general_row}>
             <section className={styles.general_column}>
-                <section className={styles.general_row}>
-                    Rivi 1
-                </section>
-                <section className={styles.general_row}>
-                Rivi 2
-                </section>
-                <section className={styles.general_row}>
-                Rivi 3
-                </section>
+                {role === "administrator" && <NewsForm />}
+                <NewsList news={news} />
             </section>
-        </>
+        </section>
     );
 }
 

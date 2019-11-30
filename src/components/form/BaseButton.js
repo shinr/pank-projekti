@@ -2,13 +2,11 @@ import React from "react"
 
 import styles from "./BaseButton.module.css"
 
-export const BaseButton = ({ onClick }) => {
+export const BaseButton = ({ label, onClick }) => {
     return (
-        <input
+        <button
             className={styles.basebutton}
-            type="button"
-            value="Kirjaudu"
-            onClick={onClick} />)
+            onClick={onClick}>{ label }</button>)
 }
 
 export default BaseButton;
