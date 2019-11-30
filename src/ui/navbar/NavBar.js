@@ -1,7 +1,5 @@
 import React from "react"
 
-import { UserStateProvider } from "../../state/state"
-import { userReducer } from "../../state/reducers"
 import NavButton from "../../components/navbar/NavButton"
 import Login from "../login"
 import Logo from "../../images/logo2.jpg"
@@ -14,9 +12,7 @@ export const NavBar = ({ children }) => {
             <img className={styles.pank_logo} src={Logo}></img>
             {children.map((navItem) =>
                 <NavButton component={navItem} />)}
-            <UserStateProvider initialState={{ user: null, role: null, token: null }} reducer={userReducer}>
-                <Login />
-            </UserStateProvider>
+            <Login />
         </nav>);
 }
 

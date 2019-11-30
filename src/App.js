@@ -3,8 +3,8 @@ import { HashRouter } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCheckSquare, faBars, faCaretDown, faCaretRight, faUser, faDownload, faCalendar, faCalendarAlt, faHome, faNewspaper, faServer, faBook } from '@fortawesome/free-solid-svg-icons'
 
-import { AppStateProvider, initialAppState } from "./state/state"
-import { appReducer } from './state/reducers';
+import { AppStateProvider, initialAppState, UserStateProvider } from "./state/state"
+import { appReducer, userReducer } from './state/reducers';
 
 import { AppMain } from "./AppMain"
 
@@ -17,7 +17,9 @@ function App() {
   return (
     <HashRouter>
       <AppStateProvider initialState={initialAppState} reducer={appReducer}>
-        <AppMain />
+        <UserStateProvider initialState={{}} reducer={userReducer}>
+          <AppMain />
+        </UserStateProvider>
       </AppStateProvider>
     </HashRouter>
 
