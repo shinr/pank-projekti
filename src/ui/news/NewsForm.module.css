@@ -1,3 +1,4 @@
 .newsform {
-    
+    display:flex;
+    flex-direction: column;
 }

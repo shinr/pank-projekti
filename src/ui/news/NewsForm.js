@@ -42,7 +42,7 @@ export const NewsForm = () => {
             blur={(e) => setState({
                 ...state,
                 validities: {
-                    ...state.validities, 
+                    ...state.validities,
                     content: notEmpty(e.target.value)
                 },
                 news: {
@@ -50,8 +50,10 @@ export const NewsForm = () => {
                     content: e.target.value
                 }
             })} />
-        <BaseButton label="Esikatselu" onClick={() => setState({ ...state, preview: !preview })} />
-        <BaseButton onClick={() => isFormValid(validities) ? postNews(news, token) : setState({ ...state, valid: false })} label="Tallenna" />
+        <div>
+            <BaseButton label="Esikatselu" onClick={() => setState({ ...state, preview: !preview })} />
+            <BaseButton onClick={() => isFormValid(validities) ? postNews(news, token) : setState({ ...state, valid: false })} label="Tallenna" />
+        </div>
     </div>)
 }
 
