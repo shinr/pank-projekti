@@ -5,14 +5,23 @@
 
 .documentbrowser input {
     display:block;
-    padding: 7px;
-    width:60%;
+    padding: 0px 2px 0px 2px;
+    height: 30px;
+    border-radius: 5px;
+    width: 60%;
     border: 1px solid lightgrey;
-    margin-bottom:16px;
+    margin: 16px 0px 10px 0px;
 }
 
 .documentbrowser__tags {
     display:flex;
     flex-direction:row;
     margin-bottom:16px;
+    border-radius: 5px;
+}
+
+@media only screen and (max-width: 700px) {
+    .documentbrowser__tags {
+     flex-direction: column;
+  }
 }

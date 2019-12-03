@@ -5,6 +5,7 @@
 .tabs_switcher {
     display:flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 .tabs_tab {
@@ -26,7 +27,6 @@
 
 .tabs_tab__activated {
     composes: tabs_tab;
-    color: #2f2f2f;
     background: white;
     border-bottom: 4px solid #7f7f7f;
 }
@@ -35,8 +35,5 @@
   .tabs_switcher {
       display:flex;
       flex-direction: column;
-  }
-  .tabs_tab {
-    color: inherit;
   }
 }

@@ -22,9 +22,6 @@
 
 .App-main a {
   text-decoration: none;
-  display: flex;
-  justify-content: center;
-  width: 20%;
 }
 
 .App-main {
@@ -86,10 +83,5 @@
   .App-main h1, .App-main h1, .App-main h1 {
     margin: 0px;
     display: grid;
-  }
-  .App-main a {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
   }
 }
