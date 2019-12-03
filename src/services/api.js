@@ -1,7 +1,7 @@
 import { first } from "../utils/clojure"
 import { decodePayload, withToken } from "../utils/jwt"
 import { urlBuilder } from "../utils/url"
-import { isEmpty } from "../utils/general"
+import { isEmpty, toBase64 } from "../utils/general"
 import { saveAs } from "file-saver"
 
 export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
@@ -13,6 +13,7 @@ const apiHierarchy = {
     login: { endPoint: "login", identifier: "rpc" },
     events: "events",
     documents: "documents",
+    upload: { endPoint: "upload", identifier: "rpc"},
     userInfo: { endPoint: "user_info", identifier: "rpc" }
 }
 
@@ -23,6 +24,7 @@ const defaultHandler = err => {
     console.error("Tehtiin silleen tymästi että tuli ", err)
     return [{ bad: true }]
 }
+const json = { "Content-Type": "application/json" }
 
 // actual functions that do interactions with the API
 
@@ -53,8 +55,6 @@ const getHelper = async (apiName, urlParameters = {}, additionalParameters = {},
         return errorHandler ? errorHandler(error) : defaultHandler(error)
     }
 }
-
-const json = { "Content-Type": "application/json" }
 
 // POST
 const postHelper = async (apiName, body, additionalParameters = {}, options = {}) => {
@@ -121,7 +121,11 @@ export const getDocument = async (id, fileName) => {
 }
 
 export const getDocuments = async () => {
-    const documents = await getHelper(apiHierarchy.documents)
+    const urlParameters =
+    {
+        select: ["id","filename","headline","description","posted","posted_by"]
+    }
+    const documents = await getHelper(apiHierarchy.documents, urlParameters)
     return returnArrayWhenNotBad(documents)
 }
 
@@ -142,6 +146,13 @@ export const getPages = async () => {
 export const postNews = async (article, token) => {
     const news = await postHelper(apiHierarchy.news, article, { headers: { ...json, ...withToken(token) } })
     return news
+}
+
+// backend doesn't support form data se we need to use base64
+export const postDocument = async (file, info, token) => {
+    const fileDataurl = await toBase64(file)
+    const _file = fileDataurl.split(",")[1]
+    return await postHelper(apiHierarchy.upload, { ...info, filedata: _file, filename: file.name }, { headers: { ...json, ...withToken(token) } }) // 
 }
 
 export const postEvents = async (event, token) => {

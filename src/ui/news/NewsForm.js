@@ -12,9 +12,9 @@ import BaseButton from "../../components/form/BaseButton";
 import { notEmpty, isFormValid } from "../../utils/validation"
 
 export const NewsForm = () => {
-    const [state, setState] = useState({ valid: true, validities: { headline: false, content: false }, preview: false, news: { posted_by: 1 } })
     const [user, dispatch] = useUserStateValue();
-    const { role, token } = user
+    const [state, setState] = useState({ valid: true, validities: { headline: false, content: false }, preview: false, news: { posted_by: user.id } })
+    const { id, role, token } = user
     const { preview, news, valid, validities } = state
     return (<div className={styles.newsform}>
         <h2>Kirjoita uusi uutinen</h2>
