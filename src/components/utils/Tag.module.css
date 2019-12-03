@@ -1,13 +1,33 @@
 .tag {
-    background: lightslategray;
-    border: 1px solid lightslategray;
-    border-radius: 15px;
-    padding: 2px 8px;
+    background: #cccccc;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 5px 5px;
     font-size: 12px;
     text-transform: uppercase;
+    margin-right: 5px;
 }
 
 .tag:hover {
-    background: lightblue;
+    background: #767676;
     cursor: pointer;
+}
+
+.tag:last-child {
+  margin-right: 0px;
+}
+@media only screen and (max-width: 700px) {
+.tag {
+      background: #cccccc;
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      padding: 5px 5px;
+      margin: 2px 0px 2px 0px;
+      justify-content: center;
+      display: flex;
+      width: 50%;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-right: 5px;
+    }
 }
