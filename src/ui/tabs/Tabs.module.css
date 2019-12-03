@@ -16,6 +16,9 @@
     border:0;
     color: #6f6f6f;
     border-bottom: 4px solid #dfdfdf;
+    width: 20%;
+    justify-content: center;
+    display: flex;
 }
 
 .tabs_tab:hover {
@@ -30,10 +33,16 @@
     background: white;
     border-bottom: 4px solid #7f7f7f;
 }
+a svg {
+  margin: 1px 10px 0px 0px;
+}
 
 @media only screen and (max-width: 970px) {
   .tabs_switcher {
-      display:flex;
-      flex-direction: column;
+    display:flex;
+    flex-direction: column;
+  }
+  .tabs_tab {
+    width: auto;
   }
 }

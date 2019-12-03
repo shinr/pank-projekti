@@ -84,4 +84,16 @@
     margin: 0px;
     display: grid;
   }
+  table thead {
+    display: none;
+  }
+  table td {
+    display: flex;
+  }
+  table td::before {
+    content: attr(label);
+    font-weight: bold;
+    width: 120px;
+    min-width: 120px;
+  }
 }
