@@ -1,6 +1,6 @@
 .tag {
-    background: #cccccc;
-    border: 1px solid #cccccc;
+    background: #efefef;
+    border: 1px solid #cdcdcd;
     border-radius: 5px;
     padding: 5px 5px;
     font-size: 12px;
@@ -9,7 +9,7 @@
 }
 
 .tag:hover {
-    background: #767676;
+    background: #ccc;
     cursor: pointer;
 }
 
@@ -18,8 +18,8 @@
 }
 @media only screen and (max-width: 700px) {
 .tag {
-      background: #cccccc;
-      border: 1px solid #cccccc;
+      background: #efefef;
+      border: 1px solid #cdcdcd;
       border-radius: 5px;
       padding: 5px 5px;
       margin: 2px 0px 2px 0px;
