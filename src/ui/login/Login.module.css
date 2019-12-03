@@ -15,6 +15,7 @@
   position: absolute;
   background-color:white;
   right:0px;
+  border-radius: 5px 0px 0px 5px;
   top:55px;
   border-style: solid;
   border-color: #cccccc;
@@ -54,13 +55,15 @@
   }
   .login_form {
     display: flex;
+    border-radius: 0px;
     position: absolute;
     justify-content: center;
     width: 100%;
+    top: 46px;
   }
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 770px) {
   .login_form label, .login_form input {
     margin: 0 auto;
     display: table;
