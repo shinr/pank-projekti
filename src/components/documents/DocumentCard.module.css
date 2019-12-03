@@ -1,13 +1,18 @@
 .documentcard {
-    border: 1px solid #cdcdcd;
+  border: 1px solid #cdcdcd;
+  margin-bottom: -1px;
+  border-radius: 5px;
+  background-color: white;
+  border-bottom: 1px solid #cdcdcd;
 }
 
 .documentcard label {
-    display:flex;
-    flex-direction:row;
+    display: flex;
+    flex-direction: row;
     justify-content: flex-end;
-    align-items:center;
+    align-items: center;
     background: #efefef;
+    border-radius: 4px;
     padding: 7px 15px;
 }
 
@@ -16,14 +21,21 @@
 }
 
 .documentcard label button {
-    border:1px solid #dfdfdf;
+    background-color: #cccccc;
+    border: 1px solid #cccccc;
     padding: 7px;
     width:32px;
     height:32px;
     margin:0px 7px;
+    border-radius: 5px;
+    color: #767676;
 }
 
 .documentcard__content {
-    padding:7px 15px;
-    background: white;
+    padding: 7px 15px;
+    color: #767676;
+}
+
+.documentcard:last-child {
+  border-bottom: 1px solid #cdcdcd;
 }
