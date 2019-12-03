@@ -8,7 +8,6 @@ import styles from "./EventCard.module.css"
 export const EventCard = ({ headline, content, date, index }) => {
     const [expanded, expand] = useState(false)
     const parsedDate = timestampToObject(new Date(date))
-    console.log(index, index % 2 === 0)
     return (
         <div className={styles.eventcard}>
             <div className={`${styles.eventcard__content} ${index % 2 === 0 ? styles.even : styles.odd}`} onClick={() => expand(!expanded)}>

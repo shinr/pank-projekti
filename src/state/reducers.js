@@ -5,8 +5,8 @@ export const userReducer = (state, action) => {
     const { type, payload } = action
     switch(type) {
         case LOGIN:
-            const { login, role, token } = payload;
-            return { login: login, role: role, token: token }
+            const { id, email, role, token } = payload;
+            return { id:id, email: email, role: role, token: token }
         default:
             throw new Error();
     }
@@ -15,7 +15,6 @@ export const userReducer = (state, action) => {
 export const appReducer = (state, action) => {
     const { SAVE_TAGS, SAVE_PAGES } = actions
     const { type, payload } = action
-    console.log(payload)
     switch(type) {
         case SAVE_TAGS:
             const { tags } = payload;
