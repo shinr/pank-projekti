@@ -58,13 +58,14 @@ const getHelper = async (apiName, urlParameters = {}, additionalParameters = {},
 
 // POST
 const postHelper = async (apiName, body, additionalParameters = {}, options = {}) => {
-    const { errorHandler, onError } = options
+    const { errorHandler, onError, upsert } = options
     const defaultParameters = {
         method: "POST",
         body: JSON.stringify(body),
         headers: json
     }
-    const parameters = Object.assign({}, defaultParameters, additionalParameters)
+    const mergedParameters = Object.assign({}, defaultParameters, additionalParameters)
+    const parameters = upsert ? { ...mergedParameters, headers: { ...mergedParameters.headers, "Prefer": "resolution=merge-duplicates"}} : mergedParameters
     const url = typeof apiName === "object" ? `${apiName.identifier}/${apiName.endPoint}` : apiName
     const mergedOptions = Object.assign({}, { onError: onError || defaultError }, options)
 
@@ -158,4 +159,9 @@ export const postDocument = async (file, info, token) => {
 export const postEvents = async (event, token) => {
     const events = await postHelper(apiHierarchy.events, event, { headers: { ...json, ...withToken(token) } })
     return events
+}
+
+export const postLink = async (links, token) => {
+    const done = await postHelper(apiHierarchy.pages, links, { headers: { ...json, ...withToken(token)}}, { upsert: true })
+    return done
 }
