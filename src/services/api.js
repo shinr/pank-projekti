@@ -3,6 +3,7 @@ import { decodePayload, withToken } from "../utils/jwt"
 import { urlBuilder } from "../utils/url"
 import { isEmpty, toBase64 } from "../utils/general"
 import { saveAs } from "file-saver"
+import { payloadAction, actions } from "../state/actions"
 
 export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
@@ -13,7 +14,7 @@ const apiHierarchy = {
     login: { endPoint: "login", identifier: "rpc" },
     events: "events",
     documents: "documents",
-    upload: { endPoint: "upload", identifier: "rpc"},
+    upload: { endPoint: "upload", identifier: "rpc" },
     userInfo: { endPoint: "user_info", identifier: "rpc" }
 }
 
@@ -29,14 +30,17 @@ const json = { "Content-Type": "application/json" }
 // actual functions that do interactions with the API
 
 const apiCall = async (url, parameters, options) => {
-    const { onError } = options
+    const { onError, onStart, onEnd } = options
+    if (onStart) onStart()
     const result = await fetch(url, parameters)
 
     if (!result.ok) {
+        if (onEnd) onEnd()
         return onError(result)
     }
 
     const data = await options.blob ? result.blob() : result.json()
+    if (onEnd) onEnd()
     return data
 }
 
@@ -65,7 +69,7 @@ const postHelper = async (apiName, body, additionalParameters = {}, options = {}
         headers: json
     }
     const mergedParameters = Object.assign({}, defaultParameters, additionalParameters)
-    const parameters = upsert ? { ...mergedParameters, headers: { ...mergedParameters.headers, "Prefer": "resolution=merge-duplicates"}} : mergedParameters
+    const parameters = upsert ? { ...mergedParameters, headers: { ...mergedParameters.headers, "Prefer": "resolution=merge-duplicates" } } : mergedParameters
     const url = typeof apiName === "object" ? `${apiName.identifier}/${apiName.endPoint}` : apiName
     const mergedOptions = Object.assign({}, { onError: onError || defaultError }, options)
 
@@ -103,30 +107,40 @@ export const getUserInfo = async (id) => {
 
 export const getEvent = async (id) => { }
 
-export const getEvents = async () => {
-    const events = await getHelper(apiHierarchy.events)
+export const getEvents = async (dispatch) => {
+    const events = await getHelper(apiHierarchy.events, {}, {}, {
+        onStart: () => dispatch(payloadAction(actions.FETCHING, { fetching: true, refresh: "events" })),
+        onEnd: () => dispatch(payloadAction(actions.FETCHING, { fetching: false }))
+    })
     // TODO also fetch user info
     //const userData = await getUserInfo()
     return returnArrayWhenNotBad(events)
 }
 
-export const getDocument = async (id, fileName) => {
+export const getDocument = async (id, fileName, dispatch) => {
     const urlParameters =
     {
         select: "filedata",
         id: { is: id }
     }
     const headers = { "Accept": "application/octet-stream" }
-    const blob = await getHelper(apiHierarchy.documents, urlParameters, { headers: headers }, { blob: true })
+    const blob = await getHelper(apiHierarchy.documents, urlParameters, { headers: headers }, {
+        blob: true,
+        onStart: () => dispatch(payloadAction(actions.FETCHING, { fetching: true })),
+        onEnd: () => dispatch(payloadAction(actions.FETCHING, { fetching: false }))
+    })
     saveAs(blob, fileName)
 }
 
-export const getDocuments = async () => {
+export const getDocuments = async (dispatch) => {
     const urlParameters =
     {
-        select: ["id","filename","headline","description","posted","posted_by"]
+        select: ["id", "filename", "headline", "description", "posted", "posted_by"]
     }
-    const documents = await getHelper(apiHierarchy.documents, urlParameters)
+    const documents = await getHelper(apiHierarchy.documents, urlParameters, {}, {
+        onStart: () => dispatch(payloadAction(actions.FETCHING, { fetching: true, refresh: "documents"  })),
+        onEnd: () => dispatch(payloadAction(actions.FETCHING, { fetching: false }))
+    })
     return returnArrayWhenNotBad(documents)
 }
 
@@ -136,8 +150,11 @@ export const getPage = async (name) => {
     return returnArrayWhenNotBad(page)
 }
 
-export const getPages = async () => {
-    const pages = await getHelper(apiHierarchy.pages)
+export const getPages = async (dispatch) => {
+    const pages = await getHelper(apiHierarchy.pages, {}, {}, {
+        onStart: () => dispatch(payloadAction(actions.FETCHING, { fetching: true, refresh: "pages"  })),
+        onEnd: () => dispatch(payloadAction(actions.FETCHING, { fetching: false }))
+    })
     const updated = pages.reduce((acc, p) => {
         return Object.assign(acc, { [p.name]: p.data })
     }, {})
@@ -161,7 +178,11 @@ export const postEvents = async (event, token) => {
     return events
 }
 
-export const postLink = async (links, token) => {
-    const done = await postHelper(apiHierarchy.pages, links, { headers: { ...json, ...withToken(token)}}, { upsert: true })
+export const postLink = async (links, token, dispatch) => {
+    const done = await postHelper(apiHierarchy.pages, links, { headers: { ...json, ...withToken(token) } }, {
+        upsert: true,
+        onStart: () => dispatch(payloadAction(actions.FETCHING, { fetching: true })),
+        onEnd: () => dispatch(payloadAction(actions.FETCHING, { fetching: false }))
+    })
     return done
 }

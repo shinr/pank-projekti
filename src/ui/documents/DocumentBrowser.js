@@ -3,12 +3,15 @@ import { filters } from "../../utils/filters"
 
 import { DocumentCard } from "../../components/documents/DocumentCard"
 import { Tag } from "../../components/utils/Tag"
+import { Spinnered } from "../../components/utils/Spinnered"
 
 import styles from "./DocumentBrowser.module.css"
+import { useAppStateValue } from "../../state/state"
 
 export const DocumentBrowser = ({ documents, tags }) => {
     const { allowAll, matchProperty } = filters
     const [browserState, setBrowserState] = useState({ filter: allowAll(), freeTextFilter: allowAll() })
+    const [{ fetching }, dispatchApp] = useAppStateValue()
     const _d = documents.bad
         ? <div>Yhteysvirhe! Dokumentteja ei saatu haettua</div>
         : documents
@@ -39,9 +42,11 @@ export const DocumentBrowser = ({ documents, tags }) => {
                 <div className={styles.documentbrowser__tags}>{tags.map(t => <Tag id={t.id} name={t.name} click={() => setBrowserState({ ...browserState, filter: matchProperty("tag", t.id) })} />)}</div>
             </div>
             <div></div>
-            <div>{
-                _d.length === 0 ? <div>Ei dokumentteja</div> : _d
-            }</div>
+            <Spinnered fetching={fetching}>
+                <div>{
+                    _d.length === 0 ? <div>Ei dokumentteja</div> : _d
+                }</div>
+            </Spinnered>
         </div>)
 }
 

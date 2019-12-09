@@ -1,0 +1,4 @@
+.simpleeditor {
+    display:flex;
+    flex-direction: column;
+}
