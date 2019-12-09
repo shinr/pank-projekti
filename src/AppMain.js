@@ -22,7 +22,7 @@ export const AppMain = () => {
     useEffect(() => {
         const getData = async () => {
             const data = await getPages(dispatch)
-            when(pages.length !== data.length,
+            when(Object.keys(pages) !== Object.keys(data),
                 () => dispatch(payloadAction(actions.SAVE_PAGES, { pages: data })))
         }
         when(refresh.pages, () => getData())

@@ -163,7 +163,7 @@ export const getPages = async (dispatch) => {
         ...withFetching(dispatch, "pages")
     })
     const updated = pages.reduce((acc, p) => {
-        return Object.assign(acc, { [p.name]: p.data })
+        return Object.assign(acc, { [p.name]: { meta: { id: p.id }, data: p.data} } )
     }, {})
     return updated
 }
@@ -199,3 +199,6 @@ export const postLink = async (links, token, dispatch) => {
     })
     return done
 }
+// postMember would do the same thing as postLink, so just wrap postLink with postMember for a more domain
+// specific and documenting name
+export const postMember = async (member, token, dispatch) => await postLink(member, token, dispatch)
