@@ -1,8 +1,9 @@
-import { first } from "../utils/clojure"
+import { first, doAll } from "../utils/clojure"
 import { decodePayload, withToken } from "../utils/jwt"
 import { urlBuilder } from "../utils/url"
 import { isEmpty, toBase64 } from "../utils/general"
 import { saveAs } from "file-saver"
+import { payloadAction, actions } from "../state/actions"
 
 export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
@@ -13,7 +14,7 @@ const apiHierarchy = {
     login: { endPoint: "login", identifier: "rpc" },
     events: "events",
     documents: "documents",
-    upload: { endPoint: "upload", identifier: "rpc"},
+    upload: { endPoint: "upload", identifier: "rpc" },
     userInfo: { endPoint: "user_info", identifier: "rpc" }
 }
 
@@ -26,17 +27,31 @@ const defaultHandler = err => {
 }
 const json = { "Content-Type": "application/json" }
 
+const withFetching = (dispatch, refresh = false, onStart = false, onEnd = false) => ({
+    onStart:
+        doAll(() => dispatch(payloadAction(actions.FETCHING, {
+            fetching: true,
+            ...(refresh ? { refresh: refresh } : {})
+        })), ...(onStart ? onStart : [])),
+    onEnd:
+        doAll(() => dispatch(payloadAction(actions.FETCHING, {
+            fetching: false
+        })), ...(onEnd ? onEnd : []))
+})
 // actual functions that do interactions with the API
 
 const apiCall = async (url, parameters, options) => {
-    const { onError } = options
+    const { onError, onStart, onEnd } = options
+    if (onStart) onStart()
     const result = await fetch(url, parameters)
 
     if (!result.ok) {
+        if (onEnd) onEnd()
         return onError(result)
     }
 
     const data = await options.blob ? result.blob() : result.json()
+    if (onEnd) onEnd()
     return data
 }
 
@@ -65,7 +80,7 @@ const postHelper = async (apiName, body, additionalParameters = {}, options = {}
         headers: json
     }
     const mergedParameters = Object.assign({}, defaultParameters, additionalParameters)
-    const parameters = upsert ? { ...mergedParameters, headers: { ...mergedParameters.headers, "Prefer": "resolution=merge-duplicates"}} : mergedParameters
+    const parameters = upsert ? { ...mergedParameters, headers: { ...mergedParameters.headers, "Prefer": "resolution=merge-duplicates" } } : mergedParameters
     const url = typeof apiName === "object" ? `${apiName.identifier}/${apiName.endPoint}` : apiName
     const mergedOptions = Object.assign({}, { onError: onError || defaultError }, options)
 
@@ -103,30 +118,37 @@ export const getUserInfo = async (id) => {
 
 export const getEvent = async (id) => { }
 
-export const getEvents = async () => {
-    const events = await getHelper(apiHierarchy.events)
+export const getEvents = async (dispatch) => {
+    const events = await getHelper(apiHierarchy.events, {}, {}, {
+        ...withFetching(dispatch, "events")
+    })
     // TODO also fetch user info
     //const userData = await getUserInfo()
     return returnArrayWhenNotBad(events)
 }
 
-export const getDocument = async (id, fileName) => {
+export const getDocument = async (id, fileName, dispatch) => {
     const urlParameters =
     {
         select: "filedata",
         id: { is: id }
     }
     const headers = { "Accept": "application/octet-stream" }
-    const blob = await getHelper(apiHierarchy.documents, urlParameters, { headers: headers }, { blob: true })
+    const blob = await getHelper(apiHierarchy.documents, urlParameters, { headers: headers }, {
+        blob: true,
+        ...withFetching(dispatch)
+    })
     saveAs(blob, fileName)
 }
 
-export const getDocuments = async () => {
+export const getDocuments = async (dispatch) => {
     const urlParameters =
     {
-        select: ["id","filename","headline","description","posted","posted_by"]
+        select: ["id", "filename", "headline", "description", "posted", "posted_by"]
     }
-    const documents = await getHelper(apiHierarchy.documents, urlParameters)
+    const documents = await getHelper(apiHierarchy.documents, urlParameters, {}, {
+        ...withFetching(dispatch, "documents")
+    })
     return returnArrayWhenNotBad(documents)
 }
 
@@ -136,16 +158,23 @@ export const getPage = async (name) => {
     return returnArrayWhenNotBad(page)
 }
 
-export const getPages = async () => {
-    const pages = await getHelper(apiHierarchy.pages)
+export const getPages = async (dispatch) => {
+    const pages = await getHelper(apiHierarchy.pages, {}, {}, {
+        ...withFetching(dispatch, "pages")
+    })
     const updated = pages.reduce((acc, p) => {
-        return Object.assign(acc, { [p.name]: p.data })
+        return Object.assign(acc, { [p.name]: { meta: { id: p.id }, data: p.data} } )
     }, {})
     return updated
 }
 
-export const postNews = async (article, token) => {
-    const news = await postHelper(apiHierarchy.news, article, { headers: { ...json, ...withToken(token) } })
+export const postNews = async (article, token, dispatch) => {
+    const news = await postHelper(apiHierarchy.news, article, { headers: { ...json, ...withToken(token) } }, {
+        upsert: true,
+        ...withFetching(dispatch, false, false, [
+            async () => dispatch(payloadAction(actions.SAVE_NEWS, { news: await getNews(dispatch) }))
+        ])
+    })
     return news
 }
 
@@ -161,7 +190,15 @@ export const postEvents = async (event, token) => {
     return events
 }
 
-export const postLink = async (links, token) => {
-    const done = await postHelper(apiHierarchy.pages, links, { headers: { ...json, ...withToken(token)}}, { upsert: true })
+export const postLink = async (links, token, dispatch) => {
+    const done = await postHelper(apiHierarchy.pages, links, { headers: { ...json, ...withToken(token) } }, {
+        upsert: true,
+        ...withFetching(dispatch, false, false, [
+            async () => dispatch(payloadAction(actions.SAVE_PAGES, { pages: await getPages(dispatch) }))
+        ])
+    })
     return done
 }
+// postMember would do the same thing as postLink, so just wrap postLink with postMember for a more domain
+// specific and documenting name
+export const postMember = async (member, token, dispatch) => await postLink(member, token, dispatch)

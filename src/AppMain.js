@@ -18,14 +18,14 @@ import { actions, payloadAction } from "./state/actions"
 import './App.css';
 
 export const AppMain = () => {
-    const [{ pages }, dispatch] = useAppStateValue()
+    const [{ pages, refresh }, dispatch] = useAppStateValue()
     useEffect(() => {
         const getData = async () => {
-            const data = await getPages()
-            when(pages.length !== data.length,
+            const data = await getPages(dispatch)
+            when(Object.keys(pages) !== Object.keys(data),
                 () => dispatch(payloadAction(actions.SAVE_PAGES, { pages: data })))
         }
-        getData()
+        when(refresh.pages, () => getData())
     })
     return (<div className="App">
         <header className="App-header">

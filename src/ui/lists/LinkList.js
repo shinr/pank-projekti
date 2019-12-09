@@ -1,26 +1,33 @@
 import React from "react"
 import Latoja from "latoja"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { useAppStateValue, useUserStateValue } from "../../state/state"
+import { useAppStateValue, useUserStateValue, emptyStateObject } from "../../state/state"
 import { postLink } from "../../services/api"
 
 import { CustomTemplate } from "../../components/templater"
 import { SimpleEditor } from "../editors/SimpleEditor"
+import Spinnered from "../../components/utils/Spinnered";
 
-import { first } from "../../utils/clojure"
+import { addIn } from "../../utils/general"
 
 export const LinkList = () => {
-    const [{ pages }, dispatch] = useAppStateValue()
-    const [{ token }, du] = useUserStateValue()
+    const [{ pages, fetching }, dispatchApp] = useAppStateValue()
+    const [{ token }, dispatchUser] = useUserStateValue()
     const { links } = pages
-    console.log(links, pages)
+    const { meta: { id }, data = [] } = links || emptyStateObject
+    
     return (<div>
-        <SimpleEditor fields={["Otsikko", "Linkki"]} submit={frm => {
-           const procs = links[0]["template_section"]["children"].push({"template_link": { "props": { "url": frm["Linkki"], "label": frm["Otsikko"]}}})
-            const payload = { id: 2, name: "links", data: links}
-            postLink(payload, token)
+        <Spinnered fetching={fetching}>
+            <SimpleEditor fields={["Otsikko", "Linkki"]} submit={frm => {
+                const procs = addIn(data,
+                    [0, "template_section", "children"],
+                    { "template_link": { "props": { "url": frm["Linkki"], "label": frm["Otsikko"] } } })
+                const payload = { id: id, name: "links", data: procs }
+                postLink(payload, token, dispatchApp)
             }} />
-        {links && <Latoja>
-            <CustomTemplate template={links} />
+        </Spinnered>
+        {data && <Latoja>
+            <CustomTemplate template={data} />
         </Latoja>}</div>)
 }

@@ -10,8 +10,20 @@ export const initialAppState = {
     memberOrganizations: [{ id: 1, name: "Oulun Yliopisto", url: "http://www.oulu.fi/yliopisto" }],
     pankInformation: [],
     strategyAndMission: {},
-    pages: []
+    pages: {},
+    fetching: false,
+    documents: [],
+    events: [],
+    news: [],
+    refresh: {
+        documents: true,
+        events: true,
+        pages: true,
+        news: true
+    }
 }
+
+export const emptyStateObject = { data: [], meta: {}}
 
 export const UserStateContext = createContext();
 export const AppStateContext = createContext();

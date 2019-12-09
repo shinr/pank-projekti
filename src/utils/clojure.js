@@ -19,3 +19,5 @@ export const rest = (arr) => {
     throw new TypeError("first was passed a non-array")
 }
 
+export const doAll = (...fns) => () => fns.map(fn => fn())
+

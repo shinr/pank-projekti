@@ -3,8 +3,7 @@ import React from "react"
 import styles from "./form.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const TextAreaField = ({ label, change, blur, valid }) => {
-
+export const TextAreaField = ({ label, change, blur, valid = true }) => {
     return (
         <>
             <label>{label && label} {!valid && <FontAwesomeIcon icon="exclamation-triangle" />}</label>
