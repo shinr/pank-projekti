@@ -1,4 +1,4 @@
-import { first } from "../utils/clojure"
+import { first, doAll } from "../utils/clojure"
 import { decodePayload, withToken } from "../utils/jwt"
 import { urlBuilder } from "../utils/url"
 import { isEmpty, toBase64 } from "../utils/general"
@@ -27,6 +27,17 @@ const defaultHandler = err => {
 }
 const json = { "Content-Type": "application/json" }
 
+const withFetching = (dispatch, refresh = false, onStart = false, onEnd = false) => ({
+    onStart:
+        doAll(() => dispatch(payloadAction(actions.FETCHING, {
+            fetching: true,
+            ...(refresh ? { refresh: refresh } : {})
+        })), ...(onStart ? onStart : [])),
+    onEnd:
+        doAll(() => dispatch(payloadAction(actions.FETCHING, {
+            fetching: false
+        })), ...(onEnd ? onEnd : []))
+})
 // actual functions that do interactions with the API
 
 const apiCall = async (url, parameters, options) => {
@@ -109,8 +120,7 @@ export const getEvent = async (id) => { }
 
 export const getEvents = async (dispatch) => {
     const events = await getHelper(apiHierarchy.events, {}, {}, {
-        onStart: () => dispatch(payloadAction(actions.FETCHING, { fetching: true, refresh: "events" })),
-        onEnd: () => dispatch(payloadAction(actions.FETCHING, { fetching: false }))
+        ...withFetching(dispatch, "events")
     })
     // TODO also fetch user info
     //const userData = await getUserInfo()
@@ -126,8 +136,7 @@ export const getDocument = async (id, fileName, dispatch) => {
     const headers = { "Accept": "application/octet-stream" }
     const blob = await getHelper(apiHierarchy.documents, urlParameters, { headers: headers }, {
         blob: true,
-        onStart: () => dispatch(payloadAction(actions.FETCHING, { fetching: true })),
-        onEnd: () => dispatch(payloadAction(actions.FETCHING, { fetching: false }))
+        ...withFetching(dispatch)
     })
     saveAs(blob, fileName)
 }
@@ -138,8 +147,7 @@ export const getDocuments = async (dispatch) => {
         select: ["id", "filename", "headline", "description", "posted", "posted_by"]
     }
     const documents = await getHelper(apiHierarchy.documents, urlParameters, {}, {
-        onStart: () => dispatch(payloadAction(actions.FETCHING, { fetching: true, refresh: "documents"  })),
-        onEnd: () => dispatch(payloadAction(actions.FETCHING, { fetching: false }))
+        ...withFetching(dispatch, "documents")
     })
     return returnArrayWhenNotBad(documents)
 }
@@ -152,8 +160,7 @@ export const getPage = async (name) => {
 
 export const getPages = async (dispatch) => {
     const pages = await getHelper(apiHierarchy.pages, {}, {}, {
-        onStart: () => dispatch(payloadAction(actions.FETCHING, { fetching: true, refresh: "pages"  })),
-        onEnd: () => dispatch(payloadAction(actions.FETCHING, { fetching: false }))
+        ...withFetching(dispatch, "pages")
     })
     const updated = pages.reduce((acc, p) => {
         return Object.assign(acc, { [p.name]: p.data })
@@ -161,8 +168,13 @@ export const getPages = async (dispatch) => {
     return updated
 }
 
-export const postNews = async (article, token) => {
-    const news = await postHelper(apiHierarchy.news, article, { headers: { ...json, ...withToken(token) } })
+export const postNews = async (article, token, dispatch) => {
+    const news = await postHelper(apiHierarchy.news, article, { headers: { ...json, ...withToken(token) } }, {
+        upsert: true,
+        ...withFetching(dispatch, false, false, [
+            async () => dispatch(payloadAction(actions.SAVE_NEWS, { news: await getNews(dispatch) }))
+        ])
+    })
     return news
 }
 
@@ -181,8 +193,9 @@ export const postEvents = async (event, token) => {
 export const postLink = async (links, token, dispatch) => {
     const done = await postHelper(apiHierarchy.pages, links, { headers: { ...json, ...withToken(token) } }, {
         upsert: true,
-        onStart: () => dispatch(payloadAction(actions.FETCHING, { fetching: true })),
-        onEnd: () => dispatch(payloadAction(actions.FETCHING, { fetching: false }))
+        ...withFetching(dispatch, false, false, [
+            async () => dispatch(payloadAction(actions.SAVE_PAGES, { pages: await getPages(dispatch) }))
+        ])
     })
     return done
 }

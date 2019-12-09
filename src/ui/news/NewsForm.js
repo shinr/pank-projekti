@@ -4,7 +4,7 @@ import { postNews } from "../../services/api"
 
 import styles from "./NewsForm.module.css"
 
-import { useUserStateValue } from '../../state/state';
+import { useUserStateValue, useAppStateValue } from '../../state/state';
 import TextInputField from "../../components/form/TextInputField";
 import TextAreaField from "../../components/form/TextAreaField";
 import BaseButton from "../../components/form/BaseButton";
@@ -13,6 +13,7 @@ import { notEmpty, isFormValid } from "../../utils/validation"
 
 export const NewsForm = () => {
     const [user, dispatch] = useUserStateValue();
+    const [app, dispatchApp] = useAppStateValue()
     const [state, setState] = useState({ valid: true, validities: { headline: false, content: false }, preview: false, news: { posted_by: user.id } })
     const { id, role, token } = user
     const { preview, news, valid, validities } = state
@@ -52,7 +53,9 @@ export const NewsForm = () => {
             })} />
         <div>
             <BaseButton label="Esikatselu" onClick={() => setState({ ...state, preview: !preview })} />
-            <BaseButton onClick={() => isFormValid(validities) ? postNews(news, token) : setState({ ...state, valid: false })} label="Tallenna" />
+            <BaseButton onClick={() => isFormValid(validities)
+                ? postNews(news, token, dispatchApp)
+                : setState({ ...state, valid: false })} label="Tallenna" />
         </div>
     </div>)
 }

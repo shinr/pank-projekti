@@ -27,6 +27,7 @@ export const LinkList = () => {
     const [{ pages, fetching }, dispatchApp] = useAppStateValue()
     const [{ token }, dispatchUser] = useUserStateValue()
     const { links } = pages
+    console.log(links)
     return (<div>
         <Spinnered fetching={fetching}>
             <SimpleEditor fields={["Otsikko", "Linkki"]} submit={frm => {
