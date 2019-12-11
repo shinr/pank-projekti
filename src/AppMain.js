@@ -11,21 +11,27 @@ import Main from './views/main'
 import Organization from './views/organization'
 import Documents from './views/documents'
 
-import { getPages } from "./services/api"
+import { getPages, getTags } from "./services/api"
 import { when } from "./utils/clojure"
 import { actions, payloadAction } from "./state/actions"
 
 import './App.css';
 
 export const AppMain = () => {
-    const [{ pages, refresh }, dispatch] = useAppStateValue()
+    const [{ pages, tags, refresh }, dispatch] = useAppStateValue()
     useEffect(() => {
         const getData = async () => {
             const data = await getPages(dispatch)
             when(Object.keys(pages) !== Object.keys(data),
                 () => dispatch(payloadAction(actions.SAVE_PAGES, { pages: data })))
         }
+        const getAllTags = async () => {
+            const data = await getTags(dispatch)
+            when(tags.length !== data.length,
+                () => dispatch(payloadAction(actions.SAVE_TAGS, { tags: data })))
+        }
         when(refresh.pages, () => getData())
+        when(refresh.tags, () => getAllTags())
     })
     return (<div className="App">
         <header className="App-header">

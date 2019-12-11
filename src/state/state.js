@@ -5,21 +5,18 @@ import React, { useReducer, useContext, createContext } from "react"
 // for pages like strategy and mission, the idea is that the data is retrieved from database and then formatted
 // dynamically by data
 export const initialAppState = {
-    tags: [{ id: 1, name: "Pöytäkirjat" }, { id: 2, name: "Seminaaripaperit" }, { id: 3, name: "Tieteelliset julkaisut" }],
-    externalLinks: [{ id: 1, title: "Autori", url: "http://www.autori.fi" }, { id: 2, title: "INFRA ry", url: "http://www.infrary.fi" }],
-    memberOrganizations: [{ id: 1, name: "Oulun Yliopisto", url: "http://www.oulu.fi/yliopisto" }],
-    pankInformation: [],
-    strategyAndMission: {},
+    tags: [],
     pages: {},
-    fetching: false,
     documents: [],
     events: [],
     news: [],
+    fetching: false,
     refresh: {
         documents: true,
         events: true,
         pages: true,
-        news: true
+        news: true,
+        tags: true
     }
 }
 

@@ -31,11 +31,11 @@ export const NewsForm = () => {
                 ...state,
                 validities: {
                     ...state.validities,
-                    headline: notEmpty(e.target.value)
+                    headline: notEmpty(e)
                 },
                 news: {
                     ...news,
-                    headline: e.target.value
+                    headline: e
                 }
             })} />
             <MarkdownEditor value={news.content} onChange={(e) => setState({

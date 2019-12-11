@@ -1,0 +1,13 @@
+
+.tagselect__tags {
+    display:flex;
+    flex-direction:row;
+    margin: 16px 0px;
+    border-radius: 5px;
+}
+
+@media only screen and (max-width: 700px) {
+    .tagselect__tags {
+     flex-direction: column;
+  }
+}

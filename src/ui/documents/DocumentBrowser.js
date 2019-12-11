@@ -9,7 +9,7 @@ import styles from "./DocumentBrowser.module.css"
 import { useAppStateValue } from "../../state/state"
 
 export const DocumentBrowser = ({ documents, tags }) => {
-    const { allowAll, matchProperty } = filters
+    const { allowAll, matchPropertyArray } = filters
     const [browserState, setBrowserState] = useState({ filter: allowAll(), freeTextFilter: allowAll() })
     const [{ fetching }, dispatchApp] = useAppStateValue()
     const _d = documents.bad
@@ -39,7 +39,15 @@ export const DocumentBrowser = ({ documents, tags }) => {
                     }} /></div>
             <div>
                 <label>Rajaa tageilla</label>
-                <div className={styles.documentbrowser__tags}>{tags.map(t => <Tag id={t.id} name={t.name} click={() => setBrowserState({ ...browserState, filter: matchProperty("tag", t.id) })} />)}</div>
+                <div className={styles.documentbrowser__tags}>{tags.map(t =>
+                    <Tag
+                        id={t.id}
+                        name={t.name}
+                        click={() =>
+                            setBrowserState({
+                                ...browserState,
+                                filter: matchPropertyArray("tags", t.id)
+                            })} />)}</div>
             </div>
             <div></div>
             <Spinnered fetching={fetching}>

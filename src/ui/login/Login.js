@@ -27,10 +27,10 @@ export const Login = (props) => {
                     : <div>
                       <label>Käyttäjä </label>
                         <TextInputField
-                            change={(e) => setLogin({ ...loginInfo, email: e.target.value })} />
+                            change={(e) => setLogin({ ...loginInfo, email: e })} />
                       <label>Salasana </label>
                         <TextInputField
-                            change={(e) => setLogin({ ...loginInfo, password: e.target.value })} password={true} />
+                            change={(e) => setLogin({ ...loginInfo, password: e })} password={true} />
                         <LoginButton
                             loginInfo={loginInfo} />
                     </div>}
