@@ -31,3 +31,37 @@
       margin-right: 5px;
     }
 }
+
+.tagselected {
+  background: #6f6f6f;
+  border: 1px solid #cdcdcd;
+  border-radius: 5px;
+  padding: 5px 5px;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-right: 5px;
+}
+
+.tagselected:hover {
+  background: #ccc;
+  cursor: pointer;
+}
+
+.tagselected:last-child {
+margin-right: 0px;
+}
+@media only screen and (max-width: 700px) {
+.tag {
+    background: #6f6f6f;
+    border: 1px solid #cdcdcd;
+    border-radius: 5px;
+    padding: 5px 5px;
+    margin: 2px 0px 2px 0px;
+    justify-content: center;
+    display: flex;
+    width: 50%;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-right: 5px;
+  }
+}

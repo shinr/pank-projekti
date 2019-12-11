@@ -38,11 +38,11 @@ export const EventForm = () => {
                 ...state,
                 validities: {
                     ...state.validities,
-                    headline: notEmpty(e.target.value)
+                    headline: notEmpty(e)
                 },
                 event: {
                     ...event,
-                    headline: e.target.value
+                    headline: e
                 }
             })} />
         <TextInputField
@@ -52,11 +52,11 @@ export const EventForm = () => {
                 ...state,
                 validities: {
                     ...state.validities,
-                    location: notEmpty(e.target.value)
+                    location: notEmpty(e)
                 },
                 event: {
                     ...event,
-                    location: e.target.value
+                    location: e
                 }
             })} />
         <CalendarWrapper onChange={date => setState({

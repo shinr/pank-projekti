@@ -14,6 +14,7 @@ const apiHierarchy = {
     login: { endPoint: "login", identifier: "rpc" },
     events: "events",
     documents: "documents",
+    tags: "tags",
     upload: { endPoint: "upload", identifier: "rpc" },
     userInfo: { endPoint: "user_info", identifier: "rpc" }
 }
@@ -144,7 +145,7 @@ export const getDocument = async (id, fileName, dispatch) => {
 export const getDocuments = async (dispatch) => {
     const urlParameters =
     {
-        select: ["id", "filename", "headline", "description", "posted", "posted_by"]
+        select: ["id", "filename", "headline", "description", "posted", "posted_by", "tags"]
     }
     const documents = await getHelper(apiHierarchy.documents, urlParameters, {}, {
         ...withFetching(dispatch, "documents")
@@ -207,3 +208,17 @@ export const postLink = async (links, token, dispatch) => {
 // postMember would do the same thing as postLink, so just wrap postLink with postMember for a more domain
 // specific and documenting name
 export const postMember = async (member, token, dispatch) => await postLink(member, token, dispatch)
+
+export const getTags = async (dispatch) => {
+    const tags = await getHelper(apiHierarchy.tags, {}, {}, {
+        ...withFetching(dispatch, "tags")
+    })
+    return tags
+}
+
+export const postTag = async (tag, token, dispatch) => {
+    const done = await postHelper(apiHierarchy.tags, tag, { headers: { ...json, ...withToken(token)}}, {
+        ...withFetching(dispatch, "tags", false, [
+            async () => dispatch(payloadAction(actions.SAVE_TAGS, { tags: await getTags(dispatch)}))])
+    })
+}
