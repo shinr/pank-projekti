@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { timestampToObject } from "../../utils/date"
 
 import styles from "./EventCard.module.css"
+import ReactMarkdown from "react-markdown";
 
 export const EventCard = ({ headline, content, date, index }) => {
     const [expanded, expand] = useState(false)
@@ -25,7 +26,7 @@ export const EventCard = ({ headline, content, date, index }) => {
             </div>
             {expanded ? <div className={styles.eventcard__expanded}>
                 <span>{`${parsedDate.day}na ${parsedDate.date}. ${parsedDate.month}ta ${parsedDate.year}`}</span>
-                {content}
+                <ReactMarkdown source={content} />
             </div> : <div></div>}
         </div>
     )

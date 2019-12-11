@@ -185,8 +185,13 @@ export const postDocument = async (file, info, token) => {
     return await postHelper(apiHierarchy.upload, { ...info, filedata: _file, filename: file.name }, { headers: { ...json, ...withToken(token) } }) // 
 }
 
-export const postEvents = async (event, token) => {
-    const events = await postHelper(apiHierarchy.events, event, { headers: { ...json, ...withToken(token) } })
+export const postEvent = async (event, token, dispatch) => {
+    const events = await postHelper(apiHierarchy.events, event, { headers: { ...json, ...withToken(token) } }, {
+        upsert: true,
+        ...withFetching(dispatch, false, false, [
+            async () => dispatch(payloadAction(actions.SAVE_EVENTS, { events: await getEvents(dispatch) }))
+        ])
+    })
     return events
 }
 
