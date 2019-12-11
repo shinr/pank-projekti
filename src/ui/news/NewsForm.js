@@ -10,6 +10,7 @@ import TextAreaField from "../../components/form/TextAreaField";
 import BaseButton from "../../components/form/BaseButton";
 
 import { notEmpty, isFormValid } from "../../utils/validation"
+import MarkdownEditor from "../editors/MarkdownEditor";
 
 export const NewsForm = () => {
     const [user, dispatch] = useUserStateValue();
@@ -37,22 +38,18 @@ export const NewsForm = () => {
                     headline: e.target.value
                 }
             })} />
-        <TextAreaField
-            valid={valid || validities.content}
-            label="Sisältö"
-            blur={(e) => setState({
+            <MarkdownEditor value={news.content} onChange={(e) => setState({
                 ...state,
                 validities: {
                     ...state.validities,
-                    content: notEmpty(e.target.value)
+                    content: notEmpty(e)
                 },
                 news: {
                     ...news,
-                    content: e.target.value
+                    content: e
                 }
             })} />
         <div>
-            <BaseButton label="Esikatselu" onClick={() => setState({ ...state, preview: !preview })} />
             <BaseButton onClick={() => isFormValid(validities)
                 ? postNews(news, token, dispatchApp)
                 : setState({ ...state, valid: false })} label="Tallenna" />
