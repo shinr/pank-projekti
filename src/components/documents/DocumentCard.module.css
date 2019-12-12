@@ -16,6 +16,10 @@
     padding: 7px 15px;
 }
 
+.documentcard:hover {
+    background-color: #d6e1f2;
+}
+
 .documentcard label span {
     flex-grow: 1;
 }

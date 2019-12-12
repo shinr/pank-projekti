@@ -12,7 +12,7 @@
     border:0;
     color: #4f4f4f;
     border-bottom: 4px solid #dfdfdf;
-    width: 20%;
+    width: 100%;
     justify-content: center;
     display: flex;
 }
@@ -33,12 +33,6 @@ a svg {
   margin: 1px 10px 0px 0px;
 }
 
-.tab div {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  color: #4f4f4f;
-}
 
 @media only screen and (max-width: 970px) {
   .tabs_switcher {

@@ -2,7 +2,7 @@
     width: auto;
     margin: 8px 0;
     border-radius: 5px;
-    display: inline-block;
+    display: flex;
     border: 1px solid #ccc;
     color: #767676;
     height: 30px;
@@ -10,19 +10,17 @@
     text-decoration: none;
     font-size: 18px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  
-  }
+}
 
-  .textareafield {
+.textareafield {
     width: auto;
     margin: 8px 0;
     border-radius: 5px;
-    display: inline-block;
+    display: flex;
     border: 1px solid #ccc;
     color: #767676;
     background-color: white;
     text-decoration: none;
     font-size: 18px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  
-  }
+}
