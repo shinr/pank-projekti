@@ -1,7 +1,3 @@
-.tabs {
-
-}
-
 .tabs_switcher {
     display:flex;
     flex-direction: row;
@@ -14,7 +10,7 @@
     padding:16px 32px;
     background:white;
     border:0;
-    color: #6f6f6f;
+    color: #4f4f4f;
     border-bottom: 4px solid #dfdfdf;
     width: 20%;
     justify-content: center;
@@ -22,7 +18,7 @@
 }
 
 .tabs_tab:hover {
-    background:lightgrey;
+    background:#d6e1f2;
     cursor: pointer;
     color: #4f4f4f;
     border-bottom: 4px solid #afafaf;
@@ -31,10 +27,17 @@
 .tabs_tab__activated {
     composes: tabs_tab;
     background: white;
-    border-bottom: 4px solid #7f7f7f;
+    border-bottom: 4px solid #4f4f4f;
 }
 a svg {
   margin: 1px 10px 0px 0px;
+}
+
+.tab div {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  color: #4f4f4f;
 }
 
 @media only screen and (max-width: 970px) {

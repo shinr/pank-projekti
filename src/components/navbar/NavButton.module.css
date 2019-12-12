@@ -7,20 +7,20 @@
     margin-left: -1px;
     border-width: 0px 1px 0px 1px;
     display: flex;
+    justify-content: center;
 }
 
 .navbutton a {
     text-align: center;
-    color: #767676;
+    color: #4f4f4f;
     padding:15px;
-    width: 130px;
     text-decoration: none;
     font-size: 18px;
     text-transform: uppercase;
 }
 
 .navbutton:hover {
-    background-color:lightgrey;
+    background-color:#d6e1f2;
 }
 
 @media only screen and (max-width: 970px) {
