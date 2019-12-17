@@ -8,13 +8,20 @@ import { Spinnered } from "../../components/utils/Spinnered"
 import styles from "./DocumentBrowser.module.css"
 import { useAppStateValue } from "../../state/state"
 
-export const DocumentBrowser = ({ documents, tags }) => {
+// documents: Array
+// tags: Array
+// useTag: Integer
+export const DocumentBrowser = ({ documents, tags, useTag }) => {
     const { allowAll, matchPropertyArray } = filters
-    const [browserState, setBrowserState] = useState({ filter: allowAll(), freeTextFilter: allowAll() })
+    const [browserState, setBrowserState] = useState({
+        filter: allowAll(),
+        freeTextFilter: allowAll()
+    })
     const [{ fetching }, dispatchApp] = useAppStateValue()
     const _d = documents.bad
         ? <div>Yhteysvirhe! Dokumentteja ei saatu haettua</div>
         : documents
+            .filter(!!useTag ? matchPropertyArray("tags", useTag) : allowAll())
             .filter(browserState.filter)
             .filter(browserState.freeTextFilter)
             .map((d) => <DocumentCard
@@ -34,7 +41,7 @@ export const DocumentBrowser = ({ documents, tags }) => {
                         const filterText = e.target.value
                         setBrowserState({
                             ...browserState,
-                            freeTextFilter: (entity) => entity.headline.indexOf(filterText) !== -1
+                            freeTextFilter: (entity) => entity.headline.toUpperCase().indexOf(filterText.toUpperCase()) !== -1
                         })
                     }} /></div>
             <div>

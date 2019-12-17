@@ -11,6 +11,7 @@ import BaseButton from "../../components/form/BaseButton";
 import { notEmpty, isFormValid } from "../../utils/validation"
 import MarkdownEditor from "../editors/MarkdownEditor";
 import CalendarWrapper from "../../components/utils/CalendarWrapper";
+import { DownloadLinkList } from "../lists/DocumentLinkList";
 
 export const EventForm = () => {
     const [user, dispatch] = useUserStateValue();
@@ -25,10 +26,10 @@ export const EventForm = () => {
             event_date: false
         },
         preview: false,
-        event: { posted_by: id }
+        event: { posted_by: id, content: "" }
     })
     const { event, valid, validities } = state
-    console.log(state)
+    console.log(state, window.location.href)
     return (<div className={styles.newsform}>
         <h2>Kirjoita uusi tapahtuma</h2>
         <TextInputField
@@ -60,16 +61,16 @@ export const EventForm = () => {
                 }
             })} />
         <CalendarWrapper onChange={date => setState({
-                ...state,
-                validities: {
-                    ...state.validities,
-                    event_date: notEmpty(date)
-                },
-                event: {
-                    ...event,
-                    event_date: date
-                }
-            })}
+            ...state,
+            validities: {
+                ...state.validities,
+                event_date: notEmpty(date)
+            },
+            event: {
+                ...event,
+                event_date: date
+            }
+        })}
             value={event.event_date} />
         <MarkdownEditor
             label="Tapahtuman kuvaus"
@@ -85,6 +86,13 @@ export const EventForm = () => {
                     content: e
                 }
             })} />
+        <DownloadLinkList getOnClickFn={(document) => () => setState({
+            ...state,
+            event: {
+                ...event, 
+                content: state.event.content += `[böö](${window.location.href}download/${document.id}/${btoa(document.filename)})`
+            }
+        })} />
         <div>
             <BaseButton onClick={() => isFormValid(validities)
                 ? postEvent(event, token, dispatchApp)

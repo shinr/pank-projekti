@@ -10,11 +10,6 @@ begin
   perform lo_unlink(l_oid);
 end;$$;
 
--- TAGIT
-insert into api.tags (name) values ('Pöytäkirja');
-insert into api.tags (name) values ('Seminaaripaperi');
-insert into api.tags (name) values ('Konferenssijulkaisu');
-
 -- UUTISET
 insert into api.news (headline, posted_by, content) values
   ('Lisää tiedotteita', 1, 'Nyt on hieno hiihtoreissu tulossa. Mikäli asfaltti kestää, mennään hiihtämään hiihtobussilla hiihtokeskukseen. Jos asfaltin päällysteissä on puutteita, joudutaan ne korjaamaan matkan varrella. Siksi menemme asfalttityökoneella.');
