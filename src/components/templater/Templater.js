@@ -16,7 +16,7 @@ export const Subtitle = ({ content }) => <h2>{content}</h2>
 export const BulletList = ({ content }) => <ul>{content.map(k => <li>{k}</li>)}</ul>
 
 export const Table = ({ labels, rows }) => (
-    <Table responsive>
+    <table>
         <thead>
             <tr>
                 {labels.map(h =>
@@ -34,7 +34,7 @@ export const Table = ({ labels, rows }) => (
                     </td>)}
                 </tr>)}
         </tbody>
-    </Table>)
+    </table>)
 
 export const CustomTemplate = ({ template }) => {
     const components = [{ component: Paragraph, type: "template_paragraph" },

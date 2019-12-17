@@ -16,9 +16,9 @@ export const PANKInfoPage = () => {
                 account: "660100-1177609"
             }}
                 order={["title", "account"]} />
-            <InfoRow infos={{ title: "IBAN", iban: "FI" }} />
-            <InfoRow infos={{ title: "IBAN", iban: "FI" }} />
-            <InfoRow infos={{ title: "IBAN", iban: "FI" }} />
+            <InfoRow infos={{ title: "IBAN", iban: "FI7766010001177609" }} />
+            <InfoRow infos={{ title: "BIC", bic: "AABAFI22" }} />
+            <InfoRow infos={{ title: "OVT-tunnus", ovt: "003714945558" }} />
         </>)
 }
 
