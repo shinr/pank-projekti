@@ -6,12 +6,13 @@ import { useAppStateValue } from "./state/state"
 
 import NavBar from './ui/navbar'
 import Footer from "./ui/footer"
+import { Downloader } from "./ui/documents/Downloader"
 import News from './views/news'
 import Main from './views/main'
 import Organization from './views/organization'
 import Documents from './views/documents'
 
-import { getPages, getTags } from "./services/api"
+import { getPages, getTags, getDocuments } from "./services/api"
 import { when } from "./utils/clojure"
 import { actions, payloadAction } from "./state/actions"
 
@@ -32,6 +33,7 @@ export const AppMain = () => {
         }
         when(refresh.pages, () => getData())
         when(refresh.tags, () => getAllTags())
+        when(refresh.documents, async () => dispatch(payloadAction(actions.SAVE_DOCUMENTS, { documents: await getDocuments(dispatch)})))
     })
     return (<div className="App">
         <header className="App-header">
@@ -48,7 +50,8 @@ export const AppMain = () => {
                 <Route path='/pank' exact component={Organization} />
                 <Route path='/pank/:tab/' component={Organization} />
                 <Route path='/documents' exact component={Documents} />
-                <Route path='/documents/:tag/' component={Documents} />
+                <Route path='/documents/:currentTab/' component={Documents} />
+                <Route path='/download/:id/:filename' component={Downloader} />
                 <Route path='/' component={Main} />
             </Switch>
         </main>

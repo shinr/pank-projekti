@@ -16,7 +16,7 @@ export function Organization({match}) {
     return (
         <section className={styles.general_row}>
             <section className={styles.general_column}>
-                <Tabs currentTab={tab || "pank"}>
+                <Tabs rootPath="pank" currentTab={tab || "pank"}>
                     <Tab id={"pank"} icon={<FontAwesomeIcon icon="download" />} title="Organisaatio">
                         <PANKInfoPage />
                     </Tab>

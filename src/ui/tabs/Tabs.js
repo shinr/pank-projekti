@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import styles from "./Tabs.module.css"
 
-export const Tabs = ({ children, currentTab }) => {
+export const Tabs = ({ rootPath, children, currentTab }) => {
     const titles = children.map(({ props }, index) => ({ title: props.title, index: index, id: props.id, icon: props.icon }))
     const current = { tab: children.filter(kid => kid.props.id === currentTab), id: currentTab }
     return (
@@ -12,7 +12,7 @@ export const Tabs = ({ children, currentTab }) => {
                 titles.map(t =>
                     <Link
                         className={current.id === t.id ? styles.tabs_tab__activated : styles.tabs_tab}
-                        to={`/pank/${t.id}`}>{t.icon || ''}{t.title}</Link>)
+                        to={`/${rootPath}/${t.id}`}>{t.icon || ''}{t.title}</Link>)
             }
             </div>
             {current.tab}
