@@ -26,10 +26,10 @@ export const DocumentBrowser = ({ documents, tags }) => {
     return (
         <div className={styles.documentbrowser}>
             <div>
-                <label>Vapaa tekstihaku</label>
+                <label>Voit hakea haluamaasi dokumenttia alla olevalla hakukohdalla</label>
                 <input
                     type="text"
-                    placeholder="Vapaa haku"
+                    placeholder="Hae tästä"
                     onChange={(e) => {
                         const filterText = e.target.value
                         setBrowserState({
