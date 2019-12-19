@@ -32,12 +32,14 @@
     height:32px;
     margin:0px 7px;
     border-radius: 5px;
-    color: #767676;
+    color: #4f4f4f;
 }
 
 .documentcard__content {
     padding: 7px 15px;
-    color: #767676;
+    color: #4f4f4f;
+    justify-content: space-between;
+    display: flex;
 }
 
 .documentcard:last-child {
