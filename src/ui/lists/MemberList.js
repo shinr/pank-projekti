@@ -16,7 +16,7 @@ export const MemberList = () => {
     const { members } = pages
     const { meta: { id }, data } = members || emptyStateObject
 console.log(pages)
-    return (<>
+    return (<><h1>Lisää yritys</h1>
         <SimpleEditor fields={["Järjestö", "Linkki"]} submit={frm => {
             const procs = addIn(data,
                 [0, "template_section", "children"],

@@ -16,9 +16,9 @@ export const LinkList = () => {
     const [{ token }, dispatchUser] = useUserStateValue()
     const { links } = pages
     const { meta: { id }, data = [] } = links || emptyStateObject
-    
+
     return (<div>
-        <Spinnered fetching={fetching}>
+        <Spinnered fetching={fetching}><h1>Lisää järjestö</h1>
             <SimpleEditor fields={["Otsikko", "Linkki"]} submit={frm => {
                 const procs = addIn(data,
                     [0, "template_section", "children"],
