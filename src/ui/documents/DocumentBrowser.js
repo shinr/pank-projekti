@@ -33,6 +33,7 @@ export const DocumentBrowser = ({ documents, tags, useTag }) => {
     return (
         <div className={styles.documentbrowser}>
             <div>
+                <h1>TietoPANKki</h1>
                 <h3>Voit hakea haluamaasi dokumenttia alla olevalla hakukohdalla</h3>
                 <input
                     type="text"

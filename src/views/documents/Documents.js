@@ -30,7 +30,6 @@ export const Documents = ({ match }) => {
         <>
             <section className={styles.general_row}>
                 <section className={styles.general_column}>
-                    <h1>TietoPANKki</h1>
 
                     {role && <Spinnered fetching={fetching}>
                         <DocumentUploadForm />
