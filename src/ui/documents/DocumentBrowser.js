@@ -59,7 +59,7 @@ export const DocumentBrowser = ({ documents, tags, useTag }) => {
             </div>
             <div></div>
             <Spinnered fetching={fetching}>
-                <div>{
+                <div className={styles.documentslist}>{
                     _d.length === 0 ? <div>Ei dokumentteja</div> : _d
                 }</div>
             </Spinnered>
