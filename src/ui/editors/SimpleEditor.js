@@ -5,7 +5,6 @@ import styles from "./SimpleEditor.module.css"
 export const SimpleEditor = ({ fields, submit, buttonLabel }) => {
     const [state, setState] = useState({ ...fields.reduce((acc, f) => ({ ...acc, [f]: "" }), {}) })
     return (<div className={styles.simpleeditor}>
-        <h1>Lisää jäsenyritys</h1>
         <div className={styles.simpleWrapper}>
         {fields.map(f => <>
             <div className={styles.inputs}>
