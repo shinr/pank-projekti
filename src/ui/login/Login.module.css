@@ -1,8 +1,8 @@
 .login_button {
   text-transform: uppercase;
-  color: #767676;
+  color: #4f4f4f;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 16px;
   text-transform: uppercase;
   margin: auto 0px auto auto;
   height: 54px;
@@ -12,36 +12,37 @@
 }
 
 .login_form {
+  justify-content: left;
+  display: flex;
   position: absolute;
-  background-color:white;
-  right:0px;
-  border-radius: 5px 0px 0px 5px;
-  top:55px;
+  background-color: white;
+  right: 0px;
+  padding: 20px 10px 20px 10px;
+  border-radius: 0px 0px 0px 5px;
+  top: 53px;
   border-style: solid;
   border-color: #cccccc;
   border-width: 1px 1px 1px 1px;
-  box-shadow: 0px 0px 10px 1px #666666;
+
 }
 
 .login_form input {
   width: auto;
   margin: 8px 0;
   border-radius: 5px;
-  display: inline-block;
   border: 1px solid #ccc;
-  color: #767676;
+  color: #4f4f4f;
   height: 30px;
   background-color: white;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 16px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 
 }
 .login_form label {
-  color: #767676;
+  color: #4f4f4f;
   text-decoration: none;
-  font-size: 18px;
-  margin: 0px 10px auto 10px;
+  font-size: 16px;
 }
 
 
@@ -58,7 +59,7 @@
     border-radius: 0px;
     position: absolute;
     justify-content: center;
-    width: 100%;
+    width: auto;
     top: 46px;
   }
 }
@@ -70,8 +71,6 @@
   }
   .login_form {
     top: 21%;
-    filter: drop-shadow(0px 0px 100px #666666);
-    padding: 2%;
     width: auto;
     border-radius: 5px;
     right: auto;
