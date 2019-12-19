@@ -1,4 +1,3 @@
-.spinnered{
-  display: grid;
-  justify-content: center;
+.spinnered svg {
+  margin-left: 48%;
 }
