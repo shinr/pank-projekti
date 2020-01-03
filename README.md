@@ -34,7 +34,7 @@ PostgReST luo postgresql db:n schemasta REST-rajapinnan. Tietenkään varsinaise
 
 Devataan omissa brancheissa ja kamat viedään pull requestin kautta masteriin Githubissa. Eli siis git pull uusin versio masterista, luodaan oma branch, tehdään muutokset, haetaan vielä varalle uusin master ja rebasetetaan oma branchi sen päälle. Sitten pushataan kamppeet remoteen ja tehdään pull request. Pullarin yhteydessä pyörähtää testit ja kunhan ne menevät läpi, voidaan mergettää. Mergestä sitten pyörähtää läpi deployment, joka ajaa uusimmat muutokset sitten Azuren testiympäristöön.
 
-Frontendin koodaustyyli on pyritty pitämään mahdollisimman funktionaalisena, luokkakomponentteja yms on vältetty.
+Frontendin koodaustyyli on pyritty pitämään mahdollisimman funktionaalisena, luokkakomponentteja yms on vältetty mahdollisimman paljon.
 
 ## API
 
