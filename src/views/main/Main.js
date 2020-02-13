@@ -8,7 +8,7 @@ export function Main() {
     return (
         <section className={styles.general_row}>
             <section className={styles.general_column}>
-                <h1>Tervetuloa PANK ryn uudistetuille kotisivuille!</h1>
+                <h1>Tervetuloa PANK ryn uudistetuille kotisivuille!!</h1>
                 <EventForm />
             </section>
             <section className={styles.general_column_30}>
